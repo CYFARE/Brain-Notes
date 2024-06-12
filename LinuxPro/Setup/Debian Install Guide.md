@@ -105,4 +105,4 @@ sudo apt update && sudo apt dist-upgrade
 ```
 
 - reboot / restart
-- done! Now you can apply Debian Optimizations using https://github.com/haxerzin/Brain-Notes/ for more faster performance!
+- done! Now you can apply Debian Optimizations using https://github.com/CYFARE/Brain-Notes/ for more faster performance!

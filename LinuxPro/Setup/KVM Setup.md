@@ -1,11 +1,11 @@
 # KVM Setup Guide
 
-- Automated Setup script: https://github.com/haxerzin/QuickKVM/
+- Automated Setup script: https://github.com/CYFARE/QuickKVM/
 - KVM Optimization ( [[KVM Optimization]] )
 
 ## Host Setup
 
-- It's better to use https://github.com/haxerzin/QuickKVM/ instead of manually doing all these steps.
+- It's better to use https://github.com/CYFARE/QuickKVM/ instead of manually doing all these steps.
 - DO NOT enter root terminal. Being in root terminal to avoid typing 'sudo' makes you dumb. It breaks the architecture of most apps. GNU/Linux developers intend using sudo with their apps for a reason.
 
 Install following packages:
@@ -65,7 +65,7 @@ Restart the system!
 
 ### Windows 11 / 10
 
-- We have 2 ISO files: one is `virtio` and other is `Windows11`. We have to ensure that KVM is properly setup and virt-manager is running. Follow the steps in this article: https://haxerz.in/blog/article.php (TO EDIT LINK)
+- We have 2 ISO files: one is `virtio` and other is `Windows11`. We have to ensure that KVM is properly setup and virt-manager is running. Add the ISO normally, add disk device for virtio, add TPM emulated and continue.
 
 ## Cassowary Setup (Win10)
 
