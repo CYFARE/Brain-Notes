@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Markdown to HTML Example</title>
+  <style>
+    body{ letter-spacing: 0.025em;-webkit-font-smoothing: auto;-moz-osx-font-smoothing: auto;font-family:Arial, sans-serif;color:#333;line-height:1.6;padding:20px;max-width:900px;margin:0 auto;transition:all 0.3s ease;animation:fadeIn 1s}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}h1,h2,h3,h4,h5,h6{margin:10px 0}h1{font-size:2em;border-bottom:1px solid #ddd;padding-bottom:0.3em}h2{font-size:1.5em}h3{font-size:1.3em}ol,p,ul{margin-bottom:10px}a{color:#0366d6;text-decoration:none;transition:all 0.3s ease}a:hover{text-decoration:underline;color:#0366d6;transform:scale(1.05)}code{background-color:#f6f8fa;border-radius:3px;padding:0.2em 0.4em;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;font-size:85%}pre{background-color:#f6f8fa;padding:16px;overflow:auto;border-radius:6px}blockquote{padding:0 1em;color:#6a737d;border-left:0.25em solid #dfe2e5}.table{display:table;width:100%;border-collapse:collapse}.table td,.table th{padding:6px 13px;border:1px solid #dfe2e5}hr{border:0;border-top:1px solid #eee;border-bottom:0} #mynetwork{width:100%;height:400px;border:1px solid lightgray}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+</head>
+<body>
+  
+  <div style="padding:20px">
+    <h1>Content Map</h1>
+  </div>
+  <div id="mynetwork"></div>
+  <div id="output"></div>
+  
+  <script>
+    let markdown_content="";window.addEventListener('DOMContentLoaded',(event)=>{fetchMarkdownFile()});
+    async function fetchMarkdownFile() {
+      
+      const url = "https://raw.githubusercontent.com/haxerzin/Brain-Notes/main/App_Optimizations.md"; // CHANGE THIS WITH YOUR MARKDOWN FILE LINK - DONT CHANGE ANYTHING ELSE APART FROM STYLE TAG.
+
+      try{const response=await fetch(url);if(!response.ok){throw new Error(`HTTP error! status: ${response.status }`)}else{markdown_content=await response.text();var converter=new showdown.Converter(),text=markdown_content,html=converter.makeHtml(text);document.getElementById('output').innerHTML=html;createNetwork();}}catch(error){console.error('There has been a problem with your fetch operation: ',error)}} function createNetwork(){const headings=Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));const nodes=[];const edges=[];headings.forEach((heading,index)=>{nodes.push({id:index,label:heading.textContent});if(index>0){const prevHeading=headings[index-1];if(prevHeading.tagName===heading.tagName){edges.push({from:index-1,to:index})}else if(parseInt(prevHeading.tagName[1])<parseInt(heading.tagName[1])){edges.push({from:index-1,to:index})}}});const container=document.getElementById('mynetwork');const data={nodes:new vis.DataSet(nodes),edges:new vis.DataSet(edges)};const options={};new vis.Network(container,data,options)}
+
+  </script>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <script>
+
+
+  </script>
+</body>
+</html>
