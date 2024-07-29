@@ -2,6 +2,30 @@
 
 ## Using Extra Scripts/Tools
 
+### Count Total Lines For All Files In Current Directory
+
+```bash
+wc -l * | awk '{sum+=$1} END {print sum}'
+```
+
+### Remove Comments & Empty lines from all files in current directory
+
+```bash
+find . -type f -exec sed -i '/^$/d; /^#/d' {} \;
+```
+
+### Download File From URL Sequence
+
+```bash
+parallel -j 24 axel -n 24 -o ./VirusShare_{}.md5 https://virusshare.com/hashfiles/VirusShare_{}.md5 ::: {00000..00486}
+```
+
+### Grep Sensitive Files
+
+```bash
+cat allurls | grep -iE "(.*\.dat$|.*\.rtf$|.*\.xls$|.*\.ppt$|.*\.sdf$|.*\.odf$|.*\.pptx$|.*\.xlsx$|.*\.exe$|.*\.lnk$|.*\.7z$|.*\.bin$|.*\.part$|.*\.pdb$|.*\.cgi$|.*\.crdownload$|.*\.ini$|.*\.zipx$|.*\.bak$|.*\.torrent$|.*\.jar$|.*\.sys$|.*\.deb$|.*\.sh$|.*\.docm$|.*\.mdb$|.*\.xla$|.*\.zip$|.*\.tar\.gz$|.*\.txt$|.*\.json$|.*\.csv$|.*\.pdf$|.*\.doc$|.*\.docx$|.*\.js$|.*\.xml$|.*\.GIT$|.*\.git$|.*\.pem$|.*\.bash_history$|.*\.db$|.*\.key$|.*\.tar$|.*\.log$|.*\.sql$|.*\.accdb$|.*\.dbf$|.*\.apk$|.*\.cer$|.*\.cfg$|.*\.rar$|.*\.sln$|.*\.tmp$|.*\.dll$|.*\.iso$|.*\.swf$)"
+```
+
 ### Bulk rename all files in current directory & truncate certain characters
 
 ```bash
