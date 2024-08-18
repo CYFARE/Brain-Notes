@@ -23,7 +23,7 @@ parallel -j 24 axel -n 24 -o ./VirusShare_{}.md5 https://virusshare.com/hashfile
 ### Grep Sensitive Files
 
 ```bash
-cat allurls | grep -iE "(.*\.dat$|.*\.rtf$|.*\.xls$|.*\.ppt$|.*\.sdf$|.*\.odf$|.*\.pptx$|.*\.xlsx$|.*\.exe$|.*\.lnk$|.*\.7z$|.*\.bin$|.*\.part$|.*\.pdb$|.*\.cgi$|.*\.crdownload$|.*\.ini$|.*\.zipx$|.*\.bak$|.*\.torrent$|.*\.jar$|.*\.sys$|.*\.deb$|.*\.sh$|.*\.docm$|.*\.mdb$|.*\.xla$|.*\.zip$|.*\.tar\.gz$|.*\.txt$|.*\.json$|.*\.csv$|.*\.pdf$|.*\.doc$|.*\.docx$|.*\.js$|.*\.xml$|.*\.GIT$|.*\.git$|.*\.pem$|.*\.bash_history$|.*\.db$|.*\.key$|.*\.tar$|.*\.log$|.*\.sql$|.*\.accdb$|.*\.dbf$|.*\.apk$|.*\.cer$|.*\.cfg$|.*\.rar$|.*\.sln$|.*\.tmp$|.*\.dll$|.*\.iso$|.*\.swf$)"
+cat allurls | grep -iE "(.*\.dat$|.*\.rtf$|.*\.xls$|.*\.ppt$|.*\.sdf$|.*\.odf$|.*\.pptx$|.*\.xlsx$|.*\.exe$|.*\.lnk$|.*\.7z$|.*\.bin$|.*\.part$|.*\.pdb$|.*\.cgi$|.*\.crdownload$|.*\.ini$|.*\.zipx$|.*\.bak$|.*\.torrent$|.*\.jar$|.*\.sys$|.*\.deb$|.*\.sh$|.*\.docm$|.*\.mdb$|.*\.xla$|.*\.zip$|.*\.tar\.gz$|.*\.txt$|.*\.json$|.*\.csv$|.*\.pdf$|.*\.doc$|.*\.docx$|.*\.js$|.*\.xml$|.*\.GIT$|.*\.git$|.*\.pem$|.*\.bash_history$|.*\.db$|.*\.key$|.*\.tar$|.*\.log$|.*\.sql$|.*\.accdb$|.*\.dbf$|.*\.apk$|.*\.cer$|.*\.cfg$|.*\.rar$|.*\.sln$|.*\.tmp$|.*\.dll$|.*\.iso$|.*\.swf$|.*\.conf$|.*\.ovpn$|.*\.bak$|.*\.ps1$|.*\.kdbx$|.*\.lst$|.*\.htaccess$|.*\.htpasswd$)"
 ```
 
 ### Bulk rename all files in current directory & truncate certain characters
@@ -61,13 +61,13 @@ sudo apt install -y p7zip-full
 #### Folder Compression
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on new_file_name.7z existing_directory_name
+7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on new_file_name.7z existing_directory_name
 ```
 
 #### File Compression
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on new_file_name.7z old_filename.txt
+7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on new_file_name.7z old_filename.txt
 ```
 
 #### Compression with 20 CPU Threads
@@ -75,7 +75,7 @@ sudo apt install -y p7zip-full
 Please manually check how many max threads your CPU can handle!
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on -mmt=20 output.7z folder_or_file
+7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on -mmt=20 output.7z folder_or_file
 ```
 
 #### Extraction
