@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "c63700cfefcd86ea",
+        "id": "308e716f8897aeb1",
         "type": "tabs",
         "children": [
           {
-            "id": "ef15bf5b3a883bba",
+            "id": "11cbd7c15733cdbd",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SysDev/Cheatsheets/Linux Commands.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -39,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -54,7 +54,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -62,7 +64,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -85,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SysDev/Cheatsheets/Linux Commands.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -93,7 +96,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
             }
           },
           {
@@ -102,10 +107,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SysDev/Cheatsheets/Linux Commands.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
             }
           },
           {
@@ -116,7 +122,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -124,9 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "SysDev/Cheatsheets/Linux Commands.md"
-              }
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
             }
           }
         ]
@@ -146,14 +154,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ef15bf5b3a883bba",
+  "active": "11cbd7c15733cdbd",
   "lastOpenFiles": [
+    "LinuxPro/Optimizations/Debian Optimizations.md",
+    "SysDev/Cheatsheets/Linux Commands.md",
     "LinuxPro/Optimizations/App Optimizations.md",
     "LinuxPro/Optimizations/KVM Optimization.md",
-    "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/Linux Shell Basics.md",
     "SysDev/Cheatsheets/Linux Error Management.md",
-    "SysDev/Cheatsheets/Linux Commands.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
     "SysDev/Cheatsheets/Kubernetes Cheatsheet.md",
     "SysDev/Cheatsheets/IRC Guide.md",

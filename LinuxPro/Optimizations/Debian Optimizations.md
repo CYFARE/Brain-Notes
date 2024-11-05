@@ -19,24 +19,61 @@ tmpfs /var/tmp tmpfs defaults,noatime,mode=1777 0 0
 
 2. /etc/sysctl.conf
 
-## Reduced swappiness & changes to vfs cache pressure
-
-Use in virtual machines:
-
-```
-vm.swappiness=0
-vm.vfs_cache_pressure=50
-```
+## Sysctl Optimizations
 
 For any: VM or Host system:
 
+TCP, UDP and System Optimizations:
+
 ```
+net.core.rmem_max=16777216
+net.core.wmem_max=16777216
+net.ipv4.tcp_rmem="4096 87380 16777216"
+net.ipv4.tcp_wmem="4096 87380 16777216"
+net.ipv4.tcp_window_scaling=1
+net.ipv4.tcp_timestamps=1
+net.ipv4.tcp_mtu_probing=1
+net.ipv4.tcp_base_mss=1460
+net.ipv4.tcp_congestion_control=westwood+
+net.ipv4.tcp_slow_start_after_idle=1
+net.ipv4.tcp_sack=0
+net.ipv4.tcp_max_tw_buckets=200000
+net.ipv4.tcp_max_orphans=200000
+net.ipv4.udp_rmem_min=4096
+net.ipv4.udp_wmem_min=4096
+net.ipv4.udp_rmem_def=87380
+net.ipv4.udp_wmem_def=87380
+net.ipv4.udp_rmem_max=16777216
+net.ipv4.udp_wmem_max=16777216
+net.ipv4.udp_checksum=1
+net.ipv4.udp_mem=16777216 16777216 16777216
+net.ipv4.udp_frag=1
+net.ipv4.udp_checksum_verify=0
+net.ipv4.udp_timeout=300
+net.core.netdev_max_backlog=10000
+net.core.somaxconn=1024
+net.ipv4.tcp_max_syn_backlog=1024
+net.ipv4.tcp_tw_reuse=1
+net.ipv4.tcp_tw_recycle=1
+vm.dirty_ratio=10
+vm.dirty_background_ratio=5
+vm.swappiness=10
+vm.vfs_cache_pressure=50
+kernel.sched_latency_ns=1000000
+kernel.sched_migration_cost_ns=50000
+kernel.sched_min_granularity_ns=1000000
+vm.overcommit_memory=1
+vm.overcommit_ratio=50
+fs.file-max=1000000
+fs.nr_open=1000000
+kernel.threads-max=1000000
 vm.max_map_count=262144
 ```
 
 ```bash
 sudo sysctl -p
 ```
+
 
 3. /etc/default/grub
 
