@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "308e716f8897aeb1",
+        "id": "12d11bc30c923fe8",
         "type": "tabs",
         "children": [
           {
-            "id": "11cbd7c15733cdbd",
+            "id": "dbd6371ea291e12e",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -154,8 +154,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "11cbd7c15733cdbd",
+  "active": "dbd6371ea291e12e",
   "lastOpenFiles": [
+    "Misc/aflfuzznotes.md",
     "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "LinuxPro/Optimizations/App Optimizations.md",
