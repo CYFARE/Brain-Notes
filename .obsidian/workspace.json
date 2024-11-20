@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "12d11bc30c923fe8",
+        "id": "785bde771cef08e1",
         "type": "tabs",
         "children": [
           {
-            "id": "dbd6371ea291e12e",
+            "id": "5462cd38415ba330",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Misc/aflfuzznotes.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "aflfuzznotes"
             }
           }
         ]
@@ -154,8 +158,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dbd6371ea291e12e",
+  "active": "5462cd38415ba330",
   "lastOpenFiles": [
+    "Misc/aflinstruments.md",
     "Misc/aflfuzznotes.md",
     "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/Linux Commands.md",
