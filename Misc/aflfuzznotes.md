@@ -1,3 +1,7 @@
+// do linux optimizations for fuzzbench
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet elevator=deadline ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off"
+
 // Instrumenting binary using e9afl (pdftools example):
 
 e9afl -i pdfinfo -o pdfinfo.afl
@@ -73,9 +77,9 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 cmake .. \
     -DCMAKE_C_COMPILER=afl-clang-lto \
     -DCMAKE_CXX_COMPILER=afl-clang-lto++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address,undefined,leak -g" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address,undefined,leak -g" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined,leak" \
+    -DCMAKE_C_FLAGS="-fsanitize=address -g" \
+    -DCMAKE_CXX_FLAGS="-fsanitize=address -g" \
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address" \
     -DCMAKE_BUILD_TYPE=Debug \
     -DBUILD_SHARED_LIBS=OFF
 
@@ -94,9 +98,9 @@ cmake .. \
 make -j$(nproc)
 
 
--- asan :: finds memory overflow issues / heaps etc.. --
+-- asan + deterministic + slave mode --
 
-AFL_AUTORESUME=1 AFL_IMPORT_FIRST=1 AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_FAST_CAL=1 AFL_SKIP_CPUFREQ=1 AFL_NO_AFFINITY=1 AFL_USE_ASAN=1 afl-fuzz -T all -i /tmp/afl_corpus -o /tmp/afl_sync_dir -m none -t 100+ -P exploit ./pdftotext @@ 2>/dev/null
+AFL_AUTORESUME=1 AFL_IMPORT_FIRST=1 AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_FAST_CAL=1 AFL_SKIP_CPUFREQ=1 AFL_NO_AFFINITY=1 AFL_USE_ASAN=1 afl-fuzz -T all -S f01 -d -i /tmp/afl_corpus -o /tmp/afl_sync_dir -m none -t 100+ -P exploit ./pdftotext @@ 2>/dev/null
 
 // reconstruct min crash file
 
