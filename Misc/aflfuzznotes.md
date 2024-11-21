@@ -97,8 +97,12 @@ cmake .. \
 
 make -j$(nproc)
 
-
 -- asan fuzzing --
+
+mkdir -p /dev/shm/afl
+export TMPDIR=/dev/shm/afl
+mkdir -p /dev/shm/afl/corpus
+mkdir -p /dev/shm/afl/sync_dir
 
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
@@ -125,7 +129,7 @@ print_stats=1:\
 print_scariness=1:\
 paranoid=1:\
 fast_unwind_on_malloc=0:\
-external_symbolizer_path=/usr/lib/llvm-15/bin/llvm-symbolizer:\
+external_symbolizer_path=/usr/lib/llvm-16/bin/llvm-symbolizer:\
 strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05" \
 AFL_CMPLOG_ONLY_NEW=1 \
 AFL_LLVM_CTX=1 \
@@ -138,13 +142,12 @@ AFL_NO_AFFINITY=1 \
 AFL_USE_ASAN=1 \
 AFL_CRASH_EXITCODE=99 \
 afl-fuzz -L0 -T all -M master \
-  -i /tmp/afl_corpus \
-  -o /tmp/afl_sync_dir \
+  -i /dev/shm/afl/corpus \
+  -o /dev/shm/afl/sync_dir \
   -m none \
   -t 20000 \
   -P exploit \
   -- ./pdftotext @@ 2>/dev/null
-
 
 // identify unique crashes
 
