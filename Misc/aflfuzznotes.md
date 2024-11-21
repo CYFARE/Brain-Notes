@@ -66,7 +66,7 @@ export AFL_USE_ASAN=1
 export AFL_LLVM_LAF_ALL=1
 export AFL_LLVM_INJECTIONS_ALL=1
 export AFL_CMPLOG_ONLY_NEW=1
-export AFL_PERSISTENT=1
+export AFL_MAP_SIZE=262144
 export CC=afl-clang-lto
 export CXX=afl-clang-lto++
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
@@ -100,7 +100,30 @@ make -j$(nproc)
 
 -- asan + deterministic + slave mode --
 
-AFL_AUTORESUME=1 AFL_IMPORT_FIRST=1 AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_FAST_CAL=1 AFL_SKIP_CPUFREQ=1 AFL_NO_AFFINITY=1 AFL_USE_ASAN=1 afl-fuzz -T all -S f01 -d -i /tmp/afl_corpus -o /tmp/afl_sync_dir -m none -t 100+ -P exploit ./pdftotext @@ 2>/dev/null
+AFL_CMPLOG_ONLY_NEW=1 \
+AFL_LLVM_CTX=1 \
+AFL_AUTORESUME=1 \
+AFL_IMPORT_FIRST=1 \
+AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 \
+AFL_FAST_CAL=1 \
+AFL_SKIP_CPUFREQ=1 \
+AFL_NO_AFFINITY=1 \
+AFL_USE_ASAN=1 \
+AFL_USE_MSAN=1 \
+AFL_USE_TSAN=1 \
+AFL_USE_LSAN=1 \
+afl-fuzz -L0 -T all -M master \
+  -i /tmp/afl_corpus \
+  -o /tmp/afl_sync_dir \
+  -m none \
+  -t 20000 \
+  -P exploit \
+  -- ./pdftotext @@ 2>/dev/null
+
+
+// identify unique crashes
+
+afl-collect -e /tmp/crashes -o /tmp/unique_crashes ./pdftotext
 
 // reconstruct min crash file
 
