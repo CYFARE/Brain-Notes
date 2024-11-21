@@ -100,6 +100,33 @@ make -j$(nproc)
 
 -- asan + deterministic + slave mode --
 
+ASAN_OPTIONS="detect_stack_use_after_return=1:\
+strict_string_checks=1:\
+detect_stack_use_after_scope=1:\
+detect_leaks=1:\
+leak_check_at_exit=1:\
+detect_invalid_pointer_pairs=2:\
+strict_init_order=1:\
+check_initialization_order=1:\
+alloc_dealloc_mismatch=1:\
+new_delete_type_mismatch=1:\
+detect_odr_violation=2:\
+symbolize=1:\
+handle_abort=1:\
+handle_segv=1:\
+handle_sigill=1:\
+allow_user_segv_handler=1:\
+use_sigaltstack=1:\
+detect_container_overflow=1:\
+detect_odr_violation=2:\
+abort_on_error=1:\
+allocator_may_return_null=1:\
+print_stats=1:\
+print_scariness=1:\
+paranoid=1:\
+fast_unwind_on_malloc=0:\
+external_symbolizer_path=/usr/lib/llvm-15/bin/llvm-symbolizer:\
+strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05" \
 AFL_CMPLOG_ONLY_NEW=1 \
 AFL_LLVM_CTX=1 \
 AFL_AUTORESUME=1 \
@@ -109,9 +136,7 @@ AFL_FAST_CAL=1 \
 AFL_SKIP_CPUFREQ=1 \
 AFL_NO_AFFINITY=1 \
 AFL_USE_ASAN=1 \
-AFL_USE_MSAN=1 \
-AFL_USE_TSAN=1 \
-AFL_USE_LSAN=1 \
+AFL_CRASH_EXITCODE=99 \
 afl-fuzz -L0 -T all -M master \
   -i /tmp/afl_corpus \
   -o /tmp/afl_sync_dir \
