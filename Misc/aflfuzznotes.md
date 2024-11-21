@@ -98,7 +98,7 @@ cmake .. \
 make -j$(nproc)
 
 
--- asan + deterministic + slave mode --
+-- asan fuzzing --
 
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
