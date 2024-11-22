@@ -8,7 +8,13 @@ e9afl -i pdfinfo -o pdfinfo.afl
 
 // creating minimal corpus - optional //
 
-AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl_corpus -- ./pdftotext @@
+mkdir -p /tmp/afl
+mkdir -p /tmp/afl/corpus
+mkdir -p /tmp/afl/sync
+
+AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdftotext @@
+
+sudo cp /tmp/afl_corpus/* /dev/shm/afl/corpus/
 
 // copy all pdfs in folders to current directory
 
@@ -99,10 +105,19 @@ make -j$(nproc)
 
 -- asan fuzzing --
 
-mkdir -p /dev/shm/afl
-export TMPDIR=/dev/shm/afl
-mkdir -p /dev/shm/afl/corpus
-mkdir -p /dev/shm/afl/sync_dir
+ASAN_OPTIONS="detect_leaks=1:\
+leak_check_at_exit=1:\
+symbolize=0:\
+handle_abort=1:\
+handle_segv=1:\
+handle_sigill=1:\
+allow_user_segv_handler=1:\
+use_sigaltstack=1:\
+abort_on_error=1:\
+allocator_may_return_null=1:\
+fast_unwind_on_malloc=1:\
+external_symbolizer_path=/usr/lib/llvm-16/bin/llvm-symbolizer:\
+strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05"
 
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
@@ -115,7 +130,7 @@ check_initialization_order=1:\
 alloc_dealloc_mismatch=1:\
 new_delete_type_mismatch=1:\
 detect_odr_violation=2:\
-symbolize=1:\
+symbolize=0:\
 handle_abort=1:\
 handle_segv=1:\
 handle_sigill=1:\
@@ -130,7 +145,111 @@ print_scariness=1:\
 paranoid=1:\
 fast_unwind_on_malloc=0:\
 external_symbolizer_path=/usr/lib/llvm-16/bin/llvm-symbolizer:\
-strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05" \
+strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05:\
+detect_invalid_downcast=1:\
+detect_use_after_dtor=1:\
+detect_bad_cast=1:\
+detect_stack_buffer_overflow=1:\
+detect_global_buffer_overflow=1:\
+detect_use_of_uninitialized_value=1:\
+detect_invalid_load=1:\
+detect_invalid_store=1:\
+detect_invalid_free=1:\
+halt_on_error=1:\
+detect_heap_use_after_free=1:\
+detect_double_free=1:\
+detect_invalid_pointer_arithmetic=1:\
+detect_invalid_shift=1:\
+detect_invalid_comparison=1:\
+detect_invalid_bitwise_operation=1:\
+detect_invalid_division=1:\
+detect_invalid_modulus=1:\
+detect_invalid_pointer_comparison=1:\
+detect_invalid_array_index=1:\
+detect_invalid_string_operation=1:\
+detect_invalid_format_string=1:\
+detect_invalid_printf_format=1:\
+detect_invalid_scanf_format=1:\
+detect_invalid_fprintf_format=1:\
+detect_invalid_snprintf_format=1:\
+detect_invalid_vfprintf_format=1:\
+detect_invalid_vsnprintf_format=1:\
+detect_invalid_vprintf_format=1:\
+detect_invalid_vsprintf_format=1:\
+detect_invalid_strcpy=1:\
+detect_invalid_strncpy=1:\
+detect_invalid_strcat=1:\
+detect_invalid_strncat=1:\
+detect_invalid_sprintf=1:\
+detect_invalid_snprintf=1:\
+detect_invalid_vsprintf=1:\
+detect_invalid_vsprintf=1:\
+detect_invalid_strtok=1:\
+detect_invalid_strtok_r=1:\
+detect_invalid_gets=1:\
+detect_invalid_fgets=1:\
+detect_invalid_fread=1:\
+detect_invalid_fwrite=1:\
+detect_invalid_fprintf=1:\
+detect_invalid_fscanf=1:\
+detect_invalid_scanf=1:\
+detect_invalid_printf=1:\
+detect_invalid_vprintf=1:\
+detect_invalid_vfprintf=1:\
+detect_invalid_vfscanf=1:\
+detect_invalid_vscanf=1:\
+detect_invalid_strftime=1:\
+detect_invalid_strptime=1:\
+detect_invalid_strxfrm=1:\
+detect_invalid_strcoll=1:\
+detect_invalid_strcasecmp=1:\
+detect_invalid_strncasecmp=1:\
+detect_invalid_strchr=1:\
+detect_invalid_strrchr=1:\
+detect_invalid_strspn=1:\
+detect_invalid_strcspn=1:\
+detect_invalid_strpbrk=1:\
+detect_invalid_strstr=1:\
+detect_invalid_strtok=1:\
+detect_invalid_strxfrm=1:\
+detect_invalid_wcschr=1:\
+detect_invalid_wcsrchr=1:\
+detect_invalid_wcspbrk=1:\
+detect_invalid_wcsstr=1:\
+detect_invalid_wcsxfrm=1:\
+detect_invalid_wcscmp=1:\
+detect_invalid_wcscasecmp=1:\
+detect_invalid_wcscoll=1:\
+detect_invalid_wcsncmp=1:\
+detect_invalid_wcsncasecmp=1:\
+detect_invalid_wcstok=1:\
+detect_invalid_wcstok_s=1:\
+detect_invalid_wmemchr=1:\
+detect_invalid_wmemcmp=1:\
+detect_invalid_wmemcpy=1:\
+detect_invalid_wmemmove=1:\
+detect_invalid_wmemset=1:\
+detect_invalid_wprintf=1:\
+detect_invalid_wscanf=1:\
+detect_invalid_fwprintf=1:\
+detect_invalid_fwscanf=1:\
+detect_invalid_swprintf=1:\
+detect_invalid_swscanf=1:\
+detect_invalid_vwprintf=1:\
+detect_invalid_vwscanf=1:\
+detect_invalid_vfwprintf=1:\
+detect_invalid_vfwscanf=1:\
+detect_invalid_vswprintf=1:\
+detect_invalid_vswscanf=1:\
+detect_invalid_wcsftime=1:\
+detect_invalid_wcsptime=1:\
+detect_invalid_wcstod=1:\
+detect_invalid_wcstof=1:\
+detect_invalid_wcstold=1:\
+detect_invalid_wcstoul=1:\
+detect_invalid_wcstoull=1:\
+detect_invalid_wcstoll=1:\
+detect_invalid_wcstoull=1" \
 AFL_CMPLOG_ONLY_NEW=1 \
 AFL_LLVM_CTX=1 \
 AFL_AUTORESUME=1 \
@@ -142,14 +261,14 @@ AFL_NO_AFFINITY=1 \
 AFL_USE_ASAN=1 \
 AFL_CRASH_EXITCODE=99 \
 afl-fuzz -L0 -T all -M master \
-  -i /dev/shm/afl/corpus \
-  -o /dev/shm/afl/sync_dir \
+  -i /tmp/afl/corpus \
+  -o /tmp/afl/sync \
   -m none \
   -t 20000 \
   -P exploit \
   -- ./pdftotext @@ 2>/dev/null
 
-// identify unique crashes
+// identify unique crashes (requires python afl extras.. not working with new python3 versions)
 
 afl-collect -e /tmp/crashes -o /tmp/unique_crashes ./pdftotext
 
