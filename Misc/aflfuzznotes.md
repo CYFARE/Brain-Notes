@@ -61,8 +61,14 @@ export AFL_LLVM_ALLOWLIST=`pwd`/allowlist.txt
 
 cd build
 
--- fsanitize options --
-`-fsanitize=address,undefined,memory,thread,leak -fno-omit-frame-pointer`
+-- CFLAG OPTS --
+
+CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+
+LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+
+CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+
 
 export AFL_LLVM_INSTRUMENT=LTO
 export AFL_FAST_CAL=1
@@ -133,8 +139,8 @@ strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05"
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
 detect_stack_use_after_scope=1:\
-detect_leaks=1:\
-leak_check_at_exit=1:\
+detect_leaks=0:\
+leak_check_at_exit=0:\
 detect_invalid_pointer_pairs=2:\
 strict_init_order=1:\
 check_initialization_order=1:\
@@ -172,7 +178,7 @@ afl-fuzz -L 0 -T all -M master \
   -t 10000 \
   -x dict.txt \
   -P crash=100 \
-  -- ./xxd -r @@ 2>/dev/null
+  -- ./example -c @@ 2>/dev/null
 
 // identify unique crashes (requires python afl extras.. not working with new python3 versions)
 

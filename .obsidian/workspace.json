@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "6be75923843f88d6",
+        "id": "f433255a90295d27",
         "type": "tabs",
         "children": [
           {
-            "id": "9639b1dbbef42551",
+            "id": "444684c053153be1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -158,7 +158,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9639b1dbbef42551",
+  "active": "444684c053153be1",
   "lastOpenFiles": [
     "Misc/aflfuzznotes.md",
     "SysDev/Cheatsheets/Linux Commands.md",
