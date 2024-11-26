@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "527e1e564c94a655",
+        "id": "6be75923843f88d6",
         "type": "tabs",
         "children": [
           {
-            "id": "4914af8bdef5bf99",
+            "id": "9639b1dbbef42551",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -158,14 +158,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4914af8bdef5bf99",
+  "active": "9639b1dbbef42551",
   "lastOpenFiles": [
     "Misc/aflfuzznotes.md",
-    "Misc/aflinstruments.md",
-    "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/Linux Commands.md",
-    "LinuxPro/Optimizations/App Optimizations.md",
+    "Misc/aflinstruments.md",
     "LinuxPro/Optimizations/KVM Optimization.md",
+    "LinuxPro/Optimizations/Debian Optimizations.md",
+    "LinuxPro/Setup/Debian Install Guide.md",
+    "LinuxPro/Optimizations/App Optimizations.md",
     "SysDev/Cheatsheets/Linux Shell Basics.md",
     "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
