@@ -118,7 +118,7 @@ export CPPFLAGS="-D_FORTIFY_SOURCE=2"
 
 cd src/xxd
 
-make -j$(nproc) | grep -i "WARNING" | grep -v "putting it into a block list"
+make -j$(nproc)
 
 -- asan fuzzing --
 
@@ -164,7 +164,7 @@ afl-fuzz -L 0 -a text -l X -T all \
   -t 2000 \
   -x dict.txt \
   -P crash=100 \
-  -- ./pdfinfo -meta @@ 2>/dev/null
+  -- ./pdfinfo @@ 2>/dev/null
 
 // identify unique crashes (requires python afl extras.. not working with new python3 versions)
 
