@@ -12,7 +12,7 @@ mkdir -p /tmp/afl
 mkdir -p /tmp/afl/corpus
 mkdir -p /tmp/afl/sync
 
-AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdftotext @@
+AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdfinfo -meta @@ 2>/dev/null
 
 sudo cp /tmp/afl_corpus/* /dev/shm/afl/corpus/
 
@@ -63,11 +63,11 @@ cd build
 
 -- CFLAG OPTS --
 
-CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
 
-LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
 
-CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
 
 
 export AFL_LLVM_INSTRUMENT=LTO
@@ -89,9 +89,9 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 cmake .. \
     -DCMAKE_C_COMPILER=afl-clang-lto \
     -DCMAKE_CXX_COMPILER=afl-clang-lto++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address -g" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address -g" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address" \
+    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
+    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
     -DCMAKE_BUILD_TYPE=Debug \
     -DBUILD_SHARED_LIBS=OFF
 
@@ -118,29 +118,15 @@ export CPPFLAGS="-D_FORTIFY_SOURCE=2"
 
 cd src/xxd
 
-make -j$(nproc)
+make -j$(nproc) | grep -i "WARNING" | grep -v "putting it into a block list"
 
 -- asan fuzzing --
-
-ASAN_OPTIONS="detect_leaks=1:\
-leak_check_at_exit=1:\
-symbolize=0:\
-handle_abort=1:\
-handle_segv=1:\
-handle_sigill=1:\
-allow_user_segv_handler=1:\
-use_sigaltstack=1:\
-abort_on_error=1:\
-allocator_may_return_null=1:\
-fast_unwind_on_malloc=1:\
-external_symbolizer_path=/usr/lib/llvm-16/bin/llvm-symbolizer:\
-strip_path_prefix=/home/klx/Documents/experiments/aflfuzz/xpdf/xpdf-4.05"
 
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
 detect_stack_use_after_scope=1:\
-detect_leaks=0:\
-leak_check_at_exit=0:\
+detect_leaks=1:\
+leak_check_at_exit=1:\
 detect_invalid_pointer_pairs=2:\
 strict_init_order=1:\
 check_initialization_order=1:\
@@ -171,14 +157,14 @@ AFL_SKIP_CPUFREQ=1 \
 AFL_NO_AFFINITY=1 \
 AFL_USE_ASAN=1 \
 AFL_CRASH_EXITCODE=99 \
-afl-fuzz -L 0 -T all -M master \
+afl-fuzz -L 0 -a text -l X -T all \
   -i /tmp/afl/corpus \
   -o /tmp/afl/sync \
   -m none \
-  -t 10000 \
+  -t 2000 \
   -x dict.txt \
   -P crash=100 \
-  -- ./example -c @@ 2>/dev/null
+  -- ./pdfinfo -meta @@ 2>/dev/null
 
 // identify unique crashes (requires python afl extras.. not working with new python3 versions)
 
@@ -198,3 +184,13 @@ hexdump -C min_crash_0 > min_crash_0_hexdump.txt
 awk '{for(i=2;i<=17;i++) if($i ~ /^[0-9a-f]{2}$/) printf "%s", $i; print ""}' min_crash_0_hexdump.txt | xxd -r -p > trigger.pdf
 
 ./build/xpdf/pdftotext min_crash_0_reconstructed.pdf
+
+// fuzzing network apps //
+
+> download: preeny
+
+make -j$(nproc)
+
+recompile netbinary:
+
+ASAN_OPTIONS="verify_asan_link_order=false abort_on_error=1 symbolize=0" AFL_PRELOAD=path_to_preeny/x86.../desock.so afl_fuzz -i in -i out -m none ./netbinary

@@ -235,7 +235,7 @@ See *[[App Optimizations]]* for security customizations.
 Install mscore fonts :
 
 ```
-sudo apt install ttf-mscorefonts-installer
+sudo apt install ttf-mscorefonts-installer fonts-liberation fonts-liberation2 fonts-noto-cjk fonts-noto-color-emoji fonts-noto-mono fonts-noto-ui-extra fonts-roboto fonts-symbola
 ```
 
 Create the following file (change librewolf directory to FF, check your app name using ```flatpak list```):
