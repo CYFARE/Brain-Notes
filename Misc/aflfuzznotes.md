@@ -12,23 +12,27 @@ mkdir -p /tmp/afl
 mkdir -p /tmp/afl/corpus
 mkdir -p /tmp/afl/sync
 
+// minimize corpus
+
 AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdfinfo @@ 2>/dev/null
 
 sudo cp /tmp/afl_corpus/* /dev/shm/afl/corpus/
 
-// copy all pdfs in folders to current directory
+// helper commands
+
+-- copy all pdfs in folders to current directory --
 
 find . -type f -name "*.pdf" -exec mv {} ./ \;
 
-// delete non pdf files
+-- delete non pdf files --
 
 find . -type f -not -name '*.pdf' -delete
 
-// delete larger files in corpus
+-- delete larger files in corpus --
 
 find . -name "*.pdf" -size +10k -delete
 
--- testing persistent mode: xpdf with allowlist --
+// allowlist example: xdf //
 
 nano allowlist.txt
 
@@ -61,67 +65,59 @@ export AFL_LLVM_ALLOWLIST=`pwd`/allowlist.txt
 
 cd build
 
--- CFLAG OPTS --
+//  CFLAG OPTS //
 
-export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
+export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
 
-export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
+export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
 
-export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
+export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
 
-// xxd / vim
-afl-clang-lto -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2 -o xxd xxd.c
+// different coverage strategies
+
+-- ASAN (best) --
+
+export AFL_USE_ASAN=1
+
+-- LAF --
+
+export AFL_LLVM_LAF_ALL=1
+
+-- CMPLOG --
+
+export AFL_LLVM_CMPLOG=1
+
+-- Only new with cmplog --
+export AFL_CMPLOG_ONLY_NEW=1
 
 
-export AFL_LLVM_INSTRUMENT=LTO
+// general exports
+
 export AFL_FAST_CAL=1
 export AFL_SKIP_CPUFREQ=1
 export AFL_NO_AFFINITY=1
-export AFL_USE_ASAN=1
-export AFL_LLVM_LAF_ALL=1
-export AFL_LLVM_INJECTIONS_ALL=1
-export AFL_CMPLOG_ONLY_NEW=1
 export AFL_MAP_SIZE=1000000
-export CC=afl-clang-lto
-export CXX=afl-clang-lto++
+export CC=afl-clang-fast
+export CXX=afl-clang-fast++
+
+// Set System Performance //
+
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 echo core | sudo tee /proc/sys/kernel/core_pattern
 
--- for xpdf --
+-- cmake example for xpdf --
 
 cmake .. \
     -DCMAKE_C_COMPILER=afl-clang-fast \
     -DCMAKE_CXX_COMPILER=afl-clang-fast++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
+    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
     -DCMAKE_BUILD_TYPE=Debug
-
--- for poppler --
-
-cmake .. \
-    -DCMAKE_C_COMPILER=afl-clang-lto \
-    -DCMAKE_CXX_COMPILER=afl-clang-lto++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address,leak,undefined -g" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address,leak,undefined -g" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,leak,undefined" \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DENABLE_QT6=OFF
-
--- for vim::xxd --
-export CFLAGS="-fsanitize=address -fno-omit-frame-pointer -fno-stack-protector -g -O0 -fno-inline-functions -fno-strict-aliasing -fno-optimize-sibling-calls -fno-eliminate-unused-debug-symbols"
-
-export CXXFLAGS="-fsanitize=address -fno-omit-frame-pointer -fno-stack-protector -g -O0 -fno-inline-functions -fno-strict-aliasing -fno-optimize-sibling-calls -fno-eliminate-unused-debug-symbols"
-
-export LDFLAGS="-fsanitize=address -fno-omit-frame-pointer -fno-stack-protector -g -O0 -Wl,-z,now -Wl,-z,relro"
-
-export CPPFLAGS="-D_FORTIFY_SOURCE=2"
-
-cd src/xxd
 
 make -j$(nproc)
 
--- asan fuzzing --
+// ASAN Options //
 
 ASAN_OPTIONS="detect_stack_use_after_return=1:\
 strict_string_checks=1:\
@@ -148,15 +144,14 @@ print_stats=1:\
 print_scariness=1:\
 paranoid=1:\
 fast_unwind_on_malloc=0"
+
+-- fuzzer options --
+
 AFL_CMPLOG_ONLY_NEW=1 \
 AFL_LLVM_CTX=1 \
 AFL_AUTORESUME=1 \
 AFL_IMPORT_FIRST=1 \
 AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 \
-AFL_FAST_CAL=1 \
-AFL_SKIP_CPUFREQ=1 \
-AFL_NO_AFFINITY=1 \
-AFL_USE_ASAN=1 \
 AFL_CRASH_EXITCODE=99 \
 afl-fuzz -L 0 -a text -l X -T all \
   -i /tmp/afl/corpus \
@@ -201,28 +196,10 @@ recompile netbinary:
 ASAN_OPTIONS="verify_asan_link_order=false abort_on_error=1 symbolize=0" AFL_PRELOAD=path_to_preeny/x86.../desock.so afl_fuzz -i in -i out -m none ./netbinary
 
 
-// libdislocator + deffered forkserver + lto = speed
-
-
-export CFLAGS="$CFLAGS -g -O2"
-export LDFLAGS="$LDFLAGS -g -O2"
-export CEXTRA="$CEXTRA -g -O2"
+// libdislocator with asan example //
 
 export AFL_HARDEN=1 // use either this or
 export AFL_USE_ASAN=1 // use this
-
-export AFL_LLVM_INSTRUMENT=LTO
-export AFL_FAST_CAL=1
-export AFL_SKIP_CPUFREQ=1
-export AFL_NO_AFFINITY=1
-export AFL_LLVM_LAF_ALL=1
-export AFL_LLVM_INJECTIONS_ALL=1
-export AFL_CMPLOG_ONLY_NEW=1
-export AFL_MAP_SIZE=1000000
-export CC=afl-clang-lto
-export CXX=afl-clang-lto++
-echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-echo core | sudo tee /proc/sys/kernel/core_pattern
 
  > remember to have shared libs and not use ASAN and use AFL_HARDEN to find stack issues
  
@@ -233,21 +210,6 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 
 AFL_USE_ASAN=1 \
 
-AFL_CMPLOG_ONLY_NEW=1 \
-AFL_LLVM_CTX=1 \
-AFL_AUTORESUME=1 \
-AFL_IMPORT_FIRST=1 \
-AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 \
-AFL_FAST_CAL=1 \
-AFL_SKIP_CPUFREQ=1 \
-AFL_NO_AFFINITY=1 \
-AFL_CRASH_EXITCODE=99 \
+AFL_....STUFF_HERE
 AFL_PRELOAD=/usr/local/lib/afl/libdislocator.so \
-afl-fuzz -L 0 -T all -M master\
-  -i /tmp/afl/corpus \
-  -o /tmp/afl/sync \
-  -m none \
-  -x dict.txt \
-  -P explore=100 \
-  -t 40000 \
-  -- ./xxd -a -b -R always @@ 2>/dev/null
+afl-fuzz ...... 

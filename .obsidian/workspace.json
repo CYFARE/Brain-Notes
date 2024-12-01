@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "3d07c05d1a2c9063",
+        "id": "a422669976b9df0d",
         "type": "tabs",
         "children": [
           {
-            "id": "9b10f20edee97007",
+            "id": "3a7da1fc50803072",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -154,10 +154,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9b10f20edee97007",
+  "active": "3a7da1fc50803072",
   "lastOpenFiles": [
-    "Misc/aflfuzznotes.md",
     "temp.md",
+    "Misc/aflfuzznotes.md",
     "Misc/openssh.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "LinuxPro/Optimizations/Debian Optimizations.md",
