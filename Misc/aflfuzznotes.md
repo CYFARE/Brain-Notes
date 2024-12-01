@@ -12,7 +12,7 @@ mkdir -p /tmp/afl
 mkdir -p /tmp/afl/corpus
 mkdir -p /tmp/afl/sync
 
-AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdfinfo -meta @@ 2>/dev/null
+AFL_ALLOW_TMP=1 afl-cmin -T all -i /media/klx/EXTREMESSD/corpus/pdfs -o /tmp/afl/corpus -- ./pdfinfo @@ 2>/dev/null
 
 sudo cp /tmp/afl_corpus/* /dev/shm/afl/corpus/
 
@@ -26,7 +26,7 @@ find . -type f -not -name '*.pdf' -delete
 
 // delete larger files in corpus
 
-find . -name "*.pdf" -size +100k -delete
+find . -name "*.pdf" -size +10k -delete
 
 -- testing persistent mode: xpdf with allowlist --
 
@@ -63,11 +63,14 @@ cd build
 
 -- CFLAG OPTS --
 
-export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
 
-export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
 
-export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0"
+export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2"
+
+// xxd / vim
+afl-clang-lto -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2 -o xxd xxd.c
 
 
 export AFL_LLVM_INSTRUMENT=LTO
@@ -78,7 +81,7 @@ export AFL_USE_ASAN=1
 export AFL_LLVM_LAF_ALL=1
 export AFL_LLVM_INJECTIONS_ALL=1
 export AFL_CMPLOG_ONLY_NEW=1
-export AFL_MAP_SIZE=262144
+export AFL_MAP_SIZE=1000000
 export CC=afl-clang-lto
 export CXX=afl-clang-lto++
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
@@ -87,13 +90,12 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 -- for xpdf --
 
 cmake .. \
-    -DCMAKE_C_COMPILER=afl-clang-lto \
-    -DCMAKE_CXX_COMPILER=afl-clang-lto++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-omit-frame-pointer -fno-optimize-sibling-calls -g -O0" \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DBUILD_SHARED_LIBS=OFF
+    -DCMAKE_C_COMPILER=afl-clang-fast \
+    -DCMAKE_CXX_COMPILER=afl-clang-fast++ \
+    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_BUILD_TYPE=Debug
 
 -- for poppler --
 
@@ -104,7 +106,6 @@ cmake .. \
     -DCMAKE_CXX_FLAGS="-fsanitize=address,leak,undefined -g" \
     -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,leak,undefined" \
     -DCMAKE_BUILD_TYPE=Debug \
-    -DBUILD_SHARED_LIBS=OFF \
     -DENABLE_QT6=OFF
 
 -- for vim::xxd --
@@ -166,6 +167,10 @@ afl-fuzz -L 0 -a text -l X -T all \
   -P crash=100 \
   -- ./pdfinfo @@ 2>/dev/null
 
+-- using libdislocator --
+
+AFL_PRELOAD=/usr/local/lib/afl/libdislocator.so ./afl-fuzz ....
+
 // identify unique crashes (requires python afl extras.. not working with new python3 versions)
 
 afl-collect -e /tmp/crashes -o /tmp/unique_crashes ./pdftotext
@@ -194,3 +199,45 @@ make -j$(nproc)
 recompile netbinary:
 
 ASAN_OPTIONS="verify_asan_link_order=false abort_on_error=1 symbolize=0" AFL_PRELOAD=path_to_preeny/x86.../desock.so afl_fuzz -i in -i out -m none ./netbinary
+
+
+// libdislocator + lto = speed
+
+
+export CFLAGS="$CFLAGS -g -O2"
+export LDFLAGS="$LDFLAGS -g -O2"
+export CEXTRA="$CEXTRA -g -O2"
+export AFL_LLVM_INSTRUMENT=LTO
+export AFL_FAST_CAL=1
+export AFL_SKIP_CPUFREQ=1
+export AFL_NO_AFFINITY=1
+export AFL_LLVM_LAF_ALL=1
+export AFL_LLVM_INJECTIONS_ALL=1
+export AFL_CMPLOG_ONLY_NEW=1
+export AFL_MAP_SIZE=1000000
+export AFL_HARDEN=1
+export CC=afl-clang-lto
+export CXX=afl-clang-lto++
+echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+echo core | sudo tee /proc/sys/kernel/core_pattern
+
+ > remember to have shared libs and not use ASAN and use AFL_HARDEN to find stack issues
+
+AFL_CMPLOG_ONLY_NEW=1 \
+AFL_LLVM_CTX=1 \
+AFL_AUTORESUME=1 \
+AFL_IMPORT_FIRST=1 \
+AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 \
+AFL_FAST_CAL=1 \
+AFL_SKIP_CPUFREQ=1 \
+AFL_NO_AFFINITY=1 \
+AFL_CRASH_EXITCODE=99 \
+AFL_PRELOAD=/usr/local/lib/afl/libdislocator.so \
+afl-fuzz -L 0 -T all -M master\
+  -i /tmp/afl/corpus \
+  -o /tmp/afl/sync \
+  -m none \
+  -x dict.txt \
+  -P explore=100 \
+  -t 40000 \
+  -- ./xxd -a -b -R always @@ 2>/dev/null
