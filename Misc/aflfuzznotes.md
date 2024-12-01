@@ -201,12 +201,16 @@ recompile netbinary:
 ASAN_OPTIONS="verify_asan_link_order=false abort_on_error=1 symbolize=0" AFL_PRELOAD=path_to_preeny/x86.../desock.so afl_fuzz -i in -i out -m none ./netbinary
 
 
-// libdislocator + lto = speed
+// libdislocator + deffered forkserver + lto = speed
 
 
 export CFLAGS="$CFLAGS -g -O2"
 export LDFLAGS="$LDFLAGS -g -O2"
 export CEXTRA="$CEXTRA -g -O2"
+
+export AFL_HARDEN=1 // use either this or
+export AFL_USE_ASAN=1 // use this
+
 export AFL_LLVM_INSTRUMENT=LTO
 export AFL_FAST_CAL=1
 export AFL_SKIP_CPUFREQ=1
@@ -215,13 +219,19 @@ export AFL_LLVM_LAF_ALL=1
 export AFL_LLVM_INJECTIONS_ALL=1
 export AFL_CMPLOG_ONLY_NEW=1
 export AFL_MAP_SIZE=1000000
-export AFL_HARDEN=1
 export CC=afl-clang-lto
 export CXX=afl-clang-lto++
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 echo core | sudo tee /proc/sys/kernel/core_pattern
 
  > remember to have shared libs and not use ASAN and use AFL_HARDEN to find stack issues
+ 
+ > We can use ASAN but it increases overhead, however ASAN finds bugs.. 
+ 
+ > AFL deferred forkserver mode gives 2x speed improvements, but AFL persistent mode is not providing any speed improvements
+
+
+AFL_USE_ASAN=1 \
 
 AFL_CMPLOG_ONLY_NEW=1 \
 AFL_LLVM_CTX=1 \

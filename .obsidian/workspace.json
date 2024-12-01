@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "cd8530f5e6ad2cb6",
+        "id": "3d07c05d1a2c9063",
         "type": "tabs",
         "children": [
           {
-            "id": "4e6c1eb8975644e2",
+            "id": "9b10f20edee97007",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -154,7 +154,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4e6c1eb8975644e2",
+  "active": "9b10f20edee97007",
   "lastOpenFiles": [
     "Misc/aflfuzznotes.md",
     "temp.md",
