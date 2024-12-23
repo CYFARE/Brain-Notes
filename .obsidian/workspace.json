@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a422669976b9df0d",
+        "id": "faf2b2f4168533bd",
         "type": "tabs",
         "children": [
           {
-            "id": "3a7da1fc50803072",
+            "id": "30250514c8dc63f5",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -154,14 +154,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3a7da1fc50803072",
+  "active": "30250514c8dc63f5",
   "lastOpenFiles": [
-    "temp.md",
+    "Misc/tshark.md",
+    "Misc/sudo.md",
+    "Misc/ffmpeg.md",
     "Misc/aflfuzznotes.md",
-    "Misc/openssh.md",
+    "AI/Finetune LLMs.md",
     "SysDev/Cheatsheets/Linux Commands.md",
-    "LinuxPro/Optimizations/Debian Optimizations.md",
+    "AI",
     "Misc/aflinstruments.md",
+    "Misc/openssh.md",
+    "temp.md",
+    "LinuxPro/Optimizations/Debian Optimizations.md",
     "LinuxPro/Optimizations/App Optimizations.md",
     "LinuxPro/Optimizations/KVM Optimization.md",
     "LinuxPro/Setup/Debian Install Guide.md",

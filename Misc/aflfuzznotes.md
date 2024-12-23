@@ -62,16 +62,17 @@ src:*/PDFImageOutputDev.cc
 fun:*parse
 
 export AFL_LLVM_ALLOWLIST=`pwd`/allowlist.txt
+export AFL_LLVM_DENYLIST=`pwd`/denylist.txt
 
 cd build
 
 //  CFLAG OPTS //
 
-export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
+export CFLAGS="$CFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O0"
 
-export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
+export LDFLAGS="$LDFLAGS -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O0"
 
-export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3"
+export CEXTRA="$CEXTRA -fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O0"
 
 // different coverage strategies
 
@@ -82,6 +83,11 @@ export AFL_USE_ASAN=1
 -- LAF --
 
 export AFL_LLVM_LAF_ALL=1
+export AFL_LLVM_INJECTIONS_ALL=1
+export AFL_LLVM_NOT_ZERO=1
+export AFL_LLVM_INSTRUMENT=NGRAM-16
+
+use afl clang-fast with llvm mode
 
 -- CMPLOG --
 
@@ -97,8 +103,8 @@ export AFL_FAST_CAL=1
 export AFL_SKIP_CPUFREQ=1
 export AFL_NO_AFFINITY=1
 export AFL_MAP_SIZE=1000000
-export CC=afl-clang-fast
-export CXX=afl-clang-fast++
+export CC=afl-clang-lto
+export CXX=afl-clang-lto++
 
 // Set System Performance //
 
@@ -108,11 +114,11 @@ echo core | sudo tee /proc/sys/kernel/core_pattern
 -- cmake example for xpdf --
 
 cmake .. \
-    -DCMAKE_C_COMPILER=afl-clang-fast \
-    -DCMAKE_CXX_COMPILER=afl-clang-fast++ \
-    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
-    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
-    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O3" \
+    -DCMAKE_C_COMPILER=afl-clang-lto \
+    -DCMAKE_CXX_COMPILER=afl-clang-lto++ \
+    -DCMAKE_C_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_CXX_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
+    -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address -fno-stack-protector -fno-omit-frame-pointer -fno-common -fno-strict-aliasing -fno-strict-overflow -fno-delete-null-pointer-checks -fno-optimize-sibling-calls -g -O2" \
     -DCMAKE_BUILD_TYPE=Debug
 
 make -j$(nproc)
@@ -211,5 +217,6 @@ export AFL_USE_ASAN=1 // use this
 AFL_USE_ASAN=1 \
 
 AFL_....STUFF_HERE
+AFL_NO_AFFINITY=1 \
 AFL_PRELOAD=/usr/local/lib/afl/libdislocator.so \
 afl-fuzz ...... 
