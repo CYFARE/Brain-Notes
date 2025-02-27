@@ -112,7 +112,7 @@ sudo service libvirtd restart
 
 ### Hooks Structure
 
-```
+```bash
 # Before a VM is started, before resources are allocated:
 /etc/libvirt/hooks/qemu.d/$vmname/prepare/begin/*
 
@@ -131,7 +131,7 @@ sudo service libvirtd restart
 
 After everything is setup, tree folder structure will be:
 
-```
+```bash
 $ tree /etc/libvirt/hooks/
 /etc/libvirt/hooks/
 ├── qemu
@@ -166,7 +166,7 @@ IOMMU Group 12 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GA10
 
 - Create a file named `kvm.conf` and place it under `/etc/libvirt/hooks/`. Add the following entries to the file:
 
-```
+```bash
 ## Virsh devices
 VIRSH_GPU_VIDEO=pci_0000_01_00_0
 ```
@@ -174,7 +174,7 @@ VIRSH_GPU_VIDEO=pci_0000_01_00_0
 - We can add other passthrough such as SSD, USB, Audio etc.. For each of these, find the controller using `iommu.sh`,  translate the address and add to configuration file. 
 - Sample configuration with other passthrough:
 
-```
+```bash
 ## Virsh devices
 VIRSH_GPU_VIDEO=pci_0000_0a_00_0
 VIRSH_GPU_AUDIO=pci_0000_0a_00_1
@@ -189,7 +189,7 @@ VIRSH_NVME_SSD=pci_0000_04_00_0
 
 - `bind_vfio.sh` will have:
 
-```
+```bash
 #!/bin/bash
 
 ## Load the config file
@@ -206,7 +206,7 @@ virsh nodedev-detach $VIRSH_GPU_VIDEO
 
 - `unbind_vfio.sh` will have:
 
-```
+```bash
 #!/bin/bash
 
 ## Load the config file
@@ -229,7 +229,7 @@ sudo chmod +x bind_vfio.sh && sudo chmod +x unbind_vfio.sh
 
 - Make directory structure to look like this:
 
-```
+```bash
 $ tree /etc/libvirt/hooks/
 /etc/libvirt/hooks/
 ├── kvm.conf

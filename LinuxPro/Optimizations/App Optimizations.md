@@ -101,6 +101,7 @@ sudo apt install mono-devel
 
 ## Firefox Configurations
 ### Configurations: Misc
+
 ```
 dom.event.contextmenu.enabled = false
 	Don't allow websites to prevent use of right-click, 
@@ -121,6 +122,7 @@ browser.uidensity = 1
 ```
 
 ### Configurations: Privacy
+
 ```
 plugins.enumerable_names = blank
 	Disable site reading installed plugins.
@@ -272,6 +274,7 @@ extensions.pocket.api = blank
 ```
 
 ### Configurations: Performance
+
 ```
 layout.frame_rate.precise = true
 	Increases animation speed. May mitigate choppy scrolling.
@@ -288,6 +291,7 @@ html5.offmainthread = true
 ```
 
 ### Configurations: Reduce RAM Usage (Not Recommended)
+
 ```
 browser.cache.memory.capacity = xx
 	Limit memory cache size. (xx = value in MB)
@@ -319,6 +323,7 @@ javascript.options.mem.high_water_mark == xx
 ```
 
 ### Configurations: Random Privacy
+
 ```
 privacy.trackingprotection.enabled;true
 browser.tabs.loadInBackground;false
@@ -415,6 +420,7 @@ browser.tabs.closeWindowWithLastTab;false
 ```
 
 ### Extensions:  Privacy
+
 - Privacy Badger
 - Decentraleyes
 - HTTPS Everywhere
@@ -430,6 +436,7 @@ browser.tabs.closeWindowWithLastTab;false
 - Clear URLs
 
 ### Extensions:  Pentesting
+
 - Retire.js
 - Shodan.io
 - Cookie Editor
@@ -441,6 +448,7 @@ browser.tabs.closeWindowWithLastTab;false
 - User Agent Switcher
 
 ### Privacy User JS
+
 - arkenfox - https://github.com/arkenfox/user.js
 
 

@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "faf2b2f4168533bd",
+        "id": "10ac7cbef35fd148",
         "type": "tabs",
         "children": [
           {
-            "id": "30250514c8dc63f5",
+            "id": "2e718348e65befb7",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -36,7 +36,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -154,21 +155,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "30250514c8dc63f5",
+  "active": "2e718348e65befb7",
   "lastOpenFiles": [
+    "Misc/aflfuzznotes.md",
+    "LinuxPro/Optimizations/App Optimizations.md",
+    "LinuxPro/Optimizations/Debian Optimizations.md",
+    "LinuxPro/Optimizations/KVM Optimization.md",
+    "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "Misc/tshark.md",
     "Misc/sudo.md",
     "Misc/ffmpeg.md",
-    "Misc/aflfuzznotes.md",
     "AI/Finetune LLMs.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "AI",
     "Misc/aflinstruments.md",
     "Misc/openssh.md",
     "temp.md",
-    "LinuxPro/Optimizations/Debian Optimizations.md",
-    "LinuxPro/Optimizations/App Optimizations.md",
-    "LinuxPro/Optimizations/KVM Optimization.md",
     "LinuxPro/Setup/Debian Install Guide.md",
     "SysDev/Cheatsheets/Linux Shell Basics.md",
     "SysDev/Cheatsheets/Linux Error Management.md",

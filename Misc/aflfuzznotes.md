@@ -8,9 +8,8 @@ e9afl -i pdfinfo -o pdfinfo.afl
 
 // creating minimal corpus - optional //
 
-mkdir -p /tmp/afl
-mkdir -p /tmp/afl/corpus
-mkdir -p /tmp/afl/sync
+mkdir -p aflinput
+mkdir -p afloutput
 
 // minimize corpus
 
