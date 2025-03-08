@@ -11,10 +11,14 @@
             "id": "5f7c789f6841af73",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Misc/libxml2.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "libxml2"
             }
           }
         ]
@@ -157,8 +161,9 @@
   },
   "active": "5f7c789f6841af73",
   "lastOpenFiles": [
-    "Misc/2. AFL++ Instrumentation Modes Guide.md",
     "Misc/1. AFL++ Reference Guide.md",
+    "Misc/libxml2.md",
+    "Misc/2. AFL++ Instrumentation Modes Guide.md",
     "Misc/tshark.md",
     "Misc/ffmpeg.md",
     "Misc/openssh.md",
