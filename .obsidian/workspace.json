@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "54d415c9e34d6591",
+        "id": "dbc7141b10dbd060",
         "type": "tabs",
         "children": [
           {
-            "id": "5f7c789f6841af73",
+            "id": "bbe3ecfd4075d9d7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Misc/libxml2.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "libxml2"
+              "title": "New tab"
             }
           }
         ]
@@ -159,10 +155,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5f7c789f6841af73",
+  "active": "bbe3ecfd4075d9d7",
   "lastOpenFiles": [
-    "Misc/1. AFL++ Reference Guide.md",
+    "SysDev/Cheatsheets/Linux Commands.md",
     "Misc/libxml2.md",
+    "Misc/1. AFL++ Reference Guide.md",
     "Misc/2. AFL++ Instrumentation Modes Guide.md",
     "Misc/tshark.md",
     "Misc/ffmpeg.md",
@@ -173,7 +170,6 @@
     "LinuxPro/Optimizations/KVM Optimization.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "AI/Finetune LLMs.md",
-    "SysDev/Cheatsheets/Linux Commands.md",
     "AI",
     "temp.md",
     "LinuxPro/Setup/Debian Install Guide.md",

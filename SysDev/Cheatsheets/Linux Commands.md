@@ -67,15 +67,15 @@ sudo apt install -y p7zip-full
 #### File Compression
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on new_file_name.7z old_filename.txt
+7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 filename.7z yourfile.exe
 ```
 
-#### Compression with 20 CPU Threads
+#### Max 7z Compression Settings
 
 Please manually check how many max threads your CPU can handle!
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on -mmt=20 output.7z folder_or_file
+7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 filename.7z your_folder
 ```
 
 #### Extraction
@@ -83,7 +83,7 @@ Please manually check how many max threads your CPU can handle!
 Please manually check how many max threads your CPU can handle!
 
 ```bash
-7z x -mmt=20 archive_filename.7z
+7z x -mmt=32 archive_filename.7z
 ```
 
 ### Measure progress of commands
