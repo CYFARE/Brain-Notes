@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "dbc7141b10dbd060",
+        "id": "f1c46381a320ebf9",
         "type": "tabs",
         "children": [
           {
-            "id": "bbe3ecfd4075d9d7",
+            "id": "b965c8ee1b354e59",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -155,8 +155,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bbe3ecfd4075d9d7",
+  "active": "b965c8ee1b354e59",
   "lastOpenFiles": [
+    "SysDev/Cheatsheets/recsetup.md",
+    "SysDev/Cheatsheets/Linux Error Management.md",
+    "LinuxPro/Setup/KVM Setup.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "Misc/libxml2.md",
     "Misc/1. AFL++ Reference Guide.md",
@@ -174,7 +177,6 @@
     "temp.md",
     "LinuxPro/Setup/Debian Install Guide.md",
     "SysDev/Cheatsheets/Linux Shell Basics.md",
-    "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
     "SysDev/Cheatsheets/Kubernetes Cheatsheet.md",
     "SysDev/Cheatsheets/IRC Guide.md",
