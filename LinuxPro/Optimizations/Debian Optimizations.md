@@ -86,8 +86,10 @@ elevator=deadline
 - use the following only if you want to turn off kernel security
 
 ```bash
-quiet elevator=deadline ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off
+quiet elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off
 ```
+
+- Use `elevator=deadline` if not using NVMe SSD - aggressive but not as aggressive as none.
 
 ## Reduce grub load time
 
@@ -295,6 +297,19 @@ sudo apt update && sudo apt install linux-xanmod-x64v3
 - MAIN is the BEST option for most system and it's a rolling release kernel
 - DO NOT use RT unless you are using microcontrollers and similar stuff that requires "real-time clock as in 1700.00192883311hrs = 1700.00192883311hrs kind of accurate time". RT does not mean your kernel is faster. Infact, for everyday use it creates overhead. Flight systems and such critical infrastructure's "targetted" systems may use RT kernel.
 - LTS should be used by servers or if you have BULLSHIT VIDEO CARD LIKE NVIDIA. Because Nvidia drivers break with each latest kernel for many devices, especially GARBAGE manufacturers like HP, Lenovo, DELL (the most extreme garbage compatibility even with WIndoze OS) - statement true as of 2023
+
+### Udev Rules for Xanmod Kernel
+
+Finetuning `bfq` scheduler:
+
+- `sudo nano /etc/udev/rules.d/60-ioschedulers.rules`
+
+```
+# Set low_latency to 1 for the bfq scheduler on the specified device
+ACTION=="add|change", KERNEL=="nvme0n1", ATTR{queue/scheduler}="bfq", ATTR{queue/iosched/low_latency}="1"
+```
+
+- `sudo udevadm control --reload-rules && sudo udevadm trigger`
 
 ### Improvements
 
