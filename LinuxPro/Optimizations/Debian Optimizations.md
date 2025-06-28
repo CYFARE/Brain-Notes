@@ -86,7 +86,7 @@ elevator=deadline
 - use the following only if you want to turn off kernel security
 
 ```bash
-quiet elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off
+GRUB_CMDLINE_LINUX_DEFAULT="quiet elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off threadirqs rcu_nocbs=1-7 nohz_full=1-7"
 ```
 
 - Use `elevator=deadline` if not using NVMe SSD - aggressive but not as aggressive as none.
@@ -98,6 +98,9 @@ GRUB_TIMEOUT=2
 
 sudo update-grub
 ```
+
+
+## 
 
 ## Remove unnecessary language grab from aptitude
 
@@ -319,8 +322,18 @@ ACTION=="add|change", KERNEL=="nvme0n1", ATTR{queue/scheduler}="bfq", ATTR{queue
 - For AMD: `sudo apt install amd64-microcode`
 - Reboot
 
-#### FQ-PIE Queing Discipline
+#### Cake Queuing Discipline (1st Option)
+
+- /etc/sysctl.d/90-override.conf
+
+```
+net.core.default_qdisc = cake
+net.ipv4.tcp_congestion_control = bbr
+```
+
+#### FQ-PIE Queuing Discipline (2nd Option)
 
 - May improve network speed / latency improvements. However, it's debatable.
 - In terminal: `echo 'net.core.default_qdisc = fq_pie' | sudo tee /etc/sysctl.d/90-override.conf`
 - Reboot and check using: `tc qdisc show`
+
