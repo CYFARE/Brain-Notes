@@ -11,10 +11,14 @@
             "id": "b29e8130e8f5cfc6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "SysDev/Cheatsheets/Linux Commands.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Linux Commands"
             }
           }
         ]
@@ -155,7 +159,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1663cb12437cb771",
+  "active": "b29e8130e8f5cfc6",
   "lastOpenFiles": [
     "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/recsetup.md",

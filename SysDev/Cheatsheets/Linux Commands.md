@@ -14,6 +14,12 @@ wc -l * | awk '{sum+=$1} END {print sum}'
 find . -type f -exec sed -i '/^$/d; /^#/d' {} \;
 ```
 
+### Download Long URL File (curl)
+
+```bash
+curl -L -C - -o "umt5-xxl-encoder-Q8_0.gguf" --progress-bar "https://cdn-lfs-us-1.hf.co/repos/e8/98/e8984ed8e83768f7484dd9488494adfcbbac2f1a442fbc9774c87625d1cf7464/2521d4de0bf9e1cc6549866463ceae85e4ec3239bc6063f7488810be39033bbc?response-content-disposition=attachment%3B+filename*%3DUTF-8%27%27umt5-xxl-encoder-Q8_0.gguf%3B+filename%3D%22umt5-xxl-encoder-Q8_0.gguf%22%3B&Expires=1751793769&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc1MTc5Mzc2OX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy11cy0xLmhmLmNvL3JlcG9zL2U4Lzk4L2U4OTg0ZWQ4ZTgzNzY4ZjczNDg0ZGQ5NDg4NDk0YWRmY2JiYWMyZjFhNDQyZmJjOTc3NGM4NzYyNWQxY2Y3NDY0LzI1MjFkNGRlMGJmOWUxY2M2NTQ5ODY2NDNjZWFlODVlNGVjMzIzOWJjNjA2M2Y3NDg4ODEwYmUzOTAzM2JiYz9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPSoifV19&Signature=mXH%7Ek9XatY3WMhIczDgqxV3rG9b-szCkf6qRvOxrgjxk6R7y0zi7wma5HuWsoYF2a5YJqfDHe6YJA9eXrZaHYDIoVoxmhKdma-uK3f2nYqdQqqFNJlVQT4XjLdrPB0GciAG01VIT5KJ%7Exbgs7t%7ELRVcJ8Mpm0AZpxa7BEJpKV69tZefUtbaxOzorjWMrllas%7EX5%7E0g4cE9ClbR57mU0S4eFV2vkEdCZdS4ZMeHtFpbvbKjuTo%7EalvGT8qm75nPpTQ2JVM-GX7Y0UJrtU97aCalH4ZeA0%7EfPlHFf-n9pxdf9LP4L7sU1yJP7iQGjbFpD5T3joAGcrNhVsdUpZo3eDnQ__&Key-Pair-Id=K24J24Z295AEI9"
+```
+
 ### Download File From URL Sequence
 
 ```bash
