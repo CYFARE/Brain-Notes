@@ -86,7 +86,11 @@ elevator=deadline
 - use the following only if you want to turn off kernel security
 
 ```bash
-GRUB_CMDLINE_LINUX_DEFAULT="quiet elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off threadirqs rcu_nocbs=1-7 nohz_full=1-7"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off threadirqs rcu_nocbs=1-7 nohz_full=1-7 intel_pstate=active intel_pstate=no_hwp"
+
+# add the following for Intel P-States driver
+
+"intel_pstate=active intel_pstate=no_hwp"
 ```
 
 - Use `elevator=deadline` if not using NVMe SSD - aggressive but not as aggressive as none.
@@ -337,3 +341,39 @@ net.ipv4.tcp_congestion_control = bbr
 - In terminal: `echo 'net.core.default_qdisc = fq_pie' | sudo tee /etc/sysctl.d/90-override.conf`
 - Reboot and check using: `tc qdisc show`
 
+#### IRQ Affinity
+
+```bash
+# /etc/default/irqbalance
+IRQBALANCE_ONESHOT=yes
+IRQBALANCE_BANNED_CPUS=0-1
+```
+
+#### Memory Optimizations
+
+```bash
+# /etc/sysctl.d/99-memory.conf
+vm.min_free_kbytes=524288
+vm.zone_reclaim_mode=0
+vm.page-cluster=0
+kernel.numa_balancing=0
+```
+
+#### NVMe Optimizations
+
+```bash
+# /etc/udev/rules.d/71-nvme.rules
+ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/nr_requests}="2048"
+ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/io_poll}="1"
+ACTION=="add|change", KERNEL=="nvme[0-9]n[0-9]", ATTR{queue/io_poll_delay}="-1"
+```
+
+#### NVIDIA Optimizations
+
+```bash
+# /etc/modprobe.d/nvidia.conf
+options nvidia NVreg_EnablePCIeGen3=1
+options nvidia NVreg_UsePageAttributeTable=1
+options nvidia NVreg_InitializeSystemMemoryAllocations=0
+options nvidia NVreg_DynamicPowerManagement=0x02
+```
