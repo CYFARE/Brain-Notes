@@ -58,6 +58,47 @@ echo "uri_default = \"qemu:///system\"" >> ~/.config/libvirt/libvirt.conf
 
 Restart the system!
 
+### Arch Linux TPM Setup / Fix
+
+By default, if you use Arch Linux or based distros, you will face issue where virt-manager will not find TPM to use and will now allow to install Windows with TPM. Fix is easy!
+
+```bash
+sudo pacman -Syu qemu-desktop libvirt virt-manager edk2-ovmf swtpm
+```
+
+```bash
+sudo systemctl enable --now libvirtd virtlogd virtlockd
+sudo usermod -aG libvirt $USER
+newgrp libvirt
+```
+
+Now test if TPM emulation is being recognised:
+
+```bash
+virsh -c qemu:///system domcapabilities --machine q35 --arch x86_64 | sed -n '/<tpm/,/<\/tpm>/p'
+```
+
+Terminal output should be like:
+
+```xml
+    <tpm supported='yes'>
+      <enum name='model'>
+        <value>tpm-tis</value>
+        <value>tpm-crb</value>
+      </enum>
+      <enum name='backendModel'>
+        <value>passthrough</value>
+        <value>emulator</value>
+        <value>external</value>
+      </enum>
+      <enum name='backendVersion'>
+        <value>1.2</value>
+        <value>2.0</value>
+      </enum>
+    </tpm>
+```
+
+Reboot!
 ## VM Setup (Windows)
 
 - Download virtio-win from: `https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/` 

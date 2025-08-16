@@ -11,10 +11,14 @@
             "id": "07c451b5cf57efa3",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "LinuxPro/Setup/KVM Setup.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "KVM Setup"
             }
           }
         ]
