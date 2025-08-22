@@ -67,7 +67,19 @@ sudo apt install -y p7zip-full
 #### Folder Compression
 
 ```bash
-7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=1G -ms=on new_file_name.7z existing_directory_name
+7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 new_file_name.7z existing_directory_name
+```
+
+#### Parallel Folder Compression
+
+```bash
+find . -mindepth 1 -maxdepth 1 -type d -print0 | parallel -0 -j 3 --bar --halt soon,fail=1 --joblog compress_joblog.tsv --results compress_logs 'bash -c '"'"'dir="$1"; base="$(basename -- "$dir")"; arc="./${base}.7z"; tmp="${arc}.part"; rm -f -- "$tmp"; nice -n 10 ionice -c2 -n7 7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 -bb1 -bse1 -bsp1 "$tmp" "$dir" && 7z t "$tmp" && mv -f -- "$tmp" "$arc" '"'"' _ {}'
+```
+
+#### Parallel Folder Extraction
+
+```bash
+find . -mindepth 1 -maxdepth 1 -type f -name '*.7z' -print0 | parallel -0 -j 3 --bar --halt soon,fail=1 --joblog decompress_joblog.tsv --results decompress_logs 'bash -c '"'"'arc="$1"; base="$(basename -- "${arc%.7z}")"; out="./${base}"; work="./.${base}.extract.part"; rm -rf -- "$work"; mkdir -p -- "$work"; nice -n 10 ionice -c2 -n7 7z t "$arc" -bb1 -bse1 -bsp1 && nice -n 10 ionice -c2 -n7 7z x "$arc" -o"$work" -bb1 -bse1 -bsp1 && src="$work/$base"; if [ -d "$src" ]; then :; else src="$work"; fi; rm -rf -- "$out"; mv -T -- "$src" "$out"; rmdir --ignore-fail-on-non-empty "$work" || true'"'"' _ {}'
 ```
 
 #### File Compression
@@ -82,6 +94,12 @@ Please manually check how many max threads your CPU can handle!
 
 ```bash
 7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 filename.7z your_folder
+```
+
+### Tar Store-Only Mode
+
+```bash
+tar -cf - foldername/ | pv > archive.tar
 ```
 
 #### Extraction
