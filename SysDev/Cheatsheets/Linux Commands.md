@@ -32,6 +32,21 @@ parallel -j 24 axel -n 24 -o ./VirusShare_{}.md5 https://virusshare.com/hashfile
 cat allurls | grep -iE "(.*\.dat$|.*\.rtf$|.*\.xls$|.*\.ppt$|.*\.sdf$|.*\.odf$|.*\.pptx$|.*\.xlsx$|.*\.exe$|.*\.lnk$|.*\.7z$|.*\.bin$|.*\.part$|.*\.pdb$|.*\.cgi$|.*\.crdownload$|.*\.ini$|.*\.zipx$|.*\.bak$|.*\.torrent$|.*\.jar$|.*\.sys$|.*\.deb$|.*\.sh$|.*\.docm$|.*\.mdb$|.*\.xla$|.*\.zip$|.*\.tar\.gz$|.*\.txt$|.*\.json$|.*\.csv$|.*\.pdf$|.*\.doc$|.*\.docx$|.*\.js$|.*\.xml$|.*\.GIT$|.*\.git$|.*\.pem$|.*\.bash_history$|.*\.db$|.*\.key$|.*\.tar$|.*\.log$|.*\.sql$|.*\.accdb$|.*\.dbf$|.*\.apk$|.*\.cer$|.*\.cfg$|.*\.rar$|.*\.sln$|.*\.tmp$|.*\.dll$|.*\.iso$|.*\.swf$|.*\.conf$|.*\.ovpn$|.*\.bak$|.*\.ps1$|.*\.kdbx$|.*\.lst$|.*\.htaccess$|.*\.htpasswd$)"
 ```
 
+
+### Count file by extensions in current dir
+
+Fish:
+```fish
+find . -type f | sed -n 's/..*\.//p' | sort | uniq -c | sort -nr
+```
+
+### Extract all zip files in current dir to folder
+
+Fish:
+```fish
+set n (find . -maxdepth 1 -type f -name '*.zip' | wc -l); if test $n -gt 0; mkdir -p 2024; set i 0; set w 40; for f in (find . -maxdepth 1 -type f -name '*.zip' -print | sort); unzip -q -o -P infected -d 2024 "$f"; set i (math "$i+1"); set f2 (math "floor($i*$w/$n)"); set s2 (math "$w-$f2"); set b (string repeat -n $f2 '#'); set s (string repeat -n $s2 ' '); printf "\r[%s%s] %d/%d" $b $s $i $n; end; echo; end
+```
+
 ### Bulk rename all files in current directory & truncate certain characters
 
 ```bash

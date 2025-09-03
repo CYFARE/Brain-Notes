@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "b76272ea241203b8",
+        "id": "b0ec4dc5c31fefe6",
         "type": "tabs",
         "children": [
           {
-            "id": "07c451b5cf57efa3",
+            "id": "de6ed3b1a405e269",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "LinuxPro/Setup/KVM Setup.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "KVM Setup"
+              "title": "New tab"
             }
           }
         ]
@@ -151,6 +147,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -159,18 +156,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "07c451b5cf57efa3",
+  "active": "de6ed3b1a405e269",
   "lastOpenFiles": [
-    "LinuxPro/Optimizations/Debian Optimizations.md",
     "SysDev/Cheatsheets/Linux Commands.md",
+    "SysDev/Cheatsheets/Chrome Build Guide.md",
+    "SysDev/Cheatsheets/Firefox Build Process.md",
+    "SysDev/Cheatsheets/IRC Guide.md",
+    "SysDev/Cheatsheets/Python Style Guide.md",
+    "SysDev/Cheatsheets/Regex Cheatsheet.md",
     "SysDev/Cheatsheets/recsetup.md",
-    "SysDev/Cheatsheets/Linux Error Management.md",
+    "SysDev/DotNET WinForms/User Interface.md",
+    "SysDev/DotNET WinForms/Core Functions.md",
+    "Misc/ffmpeg.md",
     "LinuxPro/Setup/KVM Setup.md",
+    "LinuxPro/Optimizations/Debian Optimizations.md",
+    "SysDev/Cheatsheets/Linux Error Management.md",
     "Misc/libxml2.md",
     "Misc/1. AFL++ Reference Guide.md",
     "Misc/2. AFL++ Instrumentation Modes Guide.md",
     "Misc/tshark.md",
-    "Misc/ffmpeg.md",
     "Misc/openssh.md",
     "Misc/sudo.md",
     "LinuxPro/Optimizations/App Optimizations.md",
@@ -180,10 +184,6 @@
     "AI",
     "temp.md",
     "LinuxPro/Setup/Debian Install Guide.md",
-    "SysDev/Cheatsheets/Linux Shell Basics.md",
-    "SysDev/Cheatsheets/Python Style Guide.md",
-    "SysDev/Cheatsheets/Kubernetes Cheatsheet.md",
-    "SysDev/Cheatsheets/IRC Guide.md",
-    "SysDev/Cheatsheets/Docker Cheatsheet.md"
+    "SysDev/Cheatsheets/Linux Shell Basics.md"
   ]
 }
