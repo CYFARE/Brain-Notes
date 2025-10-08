@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "b0ec4dc5c31fefe6",
+        "id": "46cdd6e3b9fa857a",
         "type": "tabs",
         "children": [
           {
-            "id": "de6ed3b1a405e269",
+            "id": "91fc096eb4b39ea2",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -74,7 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 329.5
+    "width": 269.5
   },
   "right": {
     "id": "e23d64aa6810ec5f",
@@ -156,15 +156,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "de6ed3b1a405e269",
+  "active": "1663cb12437cb771",
   "lastOpenFiles": [
+    "WinPro/Advance Optimization.md",
+    "WinPro",
+    "SysDev/Cheatsheets/recon scripts setup.md",
+    "SysDev/Cheatsheets/Firefox Build Process.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "SysDev/Cheatsheets/Chrome Build Guide.md",
-    "SysDev/Cheatsheets/Firefox Build Process.md",
     "SysDev/Cheatsheets/IRC Guide.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
     "SysDev/Cheatsheets/Regex Cheatsheet.md",
-    "SysDev/Cheatsheets/recsetup.md",
     "SysDev/DotNET WinForms/User Interface.md",
     "SysDev/DotNET WinForms/Core Functions.md",
     "Misc/ffmpeg.md",
@@ -183,7 +185,6 @@
     "AI/Finetune LLMs.md",
     "AI",
     "temp.md",
-    "LinuxPro/Setup/Debian Install Guide.md",
-    "SysDev/Cheatsheets/Linux Shell Basics.md"
+    "LinuxPro/Setup/Debian Install Guide.md"
   ]
 }
