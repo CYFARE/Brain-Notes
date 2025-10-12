@@ -11,10 +11,14 @@
             "id": "91fc096eb4b39ea2",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "SysDev/Cheatsheets/Linux Commands.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Linux Commands"
             }
           }
         ]
@@ -156,7 +160,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1663cb12437cb771",
+  "active": "91fc096eb4b39ea2",
   "lastOpenFiles": [
     "WinPro/Advance Optimization.md",
     "WinPro",

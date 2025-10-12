@@ -100,7 +100,7 @@ find . -mindepth 1 -maxdepth 1 -type f -name '*.7z' -print0 | parallel -0 -j 3 -
 #### File Compression
 
 ```bash
-7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 filename.7z yourfile.exe
+7z a -t7z -m0=lzma2 -mx=9 -md=4096m -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=$(nproc) filename.7z yourfile.exe
 ```
 
 #### Max 7z Compression Settings
@@ -108,7 +108,21 @@ find . -mindepth 1 -maxdepth 1 -type f -name '*.7z' -print0 | parallel -0 -j 3 -
 Please manually check how many max threads your CPU can handle!
 
 ```bash
-7z a -t7z -m0=lzma2 -mx=9 -md=4G -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=32 filename.7z your_folder
+7z a -t7z -m0=lzma2 -mx=9 -md=4096m -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=$(nproc) filename.7z your_folder
+```
+
+#### 7z Max Folder Compression (Linux Only)
+
+##### Compression
+
+```bash
+tar -cf - your_folder | 7z a -t7z -si -m0=lzma2 -mx=9 -md=4096m -mfb=273 -ms=on -mqs=on -mlc=3 -mlp=1 -mmt=$(nproc) filename.tar.7z
+```
+
+##### Decompression
+
+```bash
+7z x -so filename.tar.7z | tar -xf -
 ```
 
 ### Tar Store-Only Mode
