@@ -33,14 +33,14 @@
 
 #### Misc Fuzzing
 
-- [x] [AFL++ Reference Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/1.%20AFL%2B%2B%20Reference%20Guide.md)
-- [x] [AFL++ Instrumentation Modes Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/2.%20AFL%2B%2B%20Instrumentation%20Modes%20Guide.md)
-- [x] [FFMPEG Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/ffmpeg.md)
-- [x] [Libxml2 Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/libxml2.md)
-- [x] [Markdown To HTML GitHub Style Dynamic Page](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/Markdown_to_HTML_GitHubStyled.html)
-- [x] [OpenSSH Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/openssh.md)
-- [x] [Sudo Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/sudo.md)
-- [x] [TShark Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/tshark.md)
+- [x] [AFL++ Reference Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/1.%20AFL%2B%2B%20Reference%20Guide.md)
+- [x] [AFL++ Instrumentation Modes Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/2.%20AFL%2B%2B%20Instrumentation%20Modes%20Guide.md)
+- [x] [FFMPEG Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/ffmpeg.md)
+- [x] [Libxml2 Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/libxml2.md)
+- [x] [Markdown To HTML GitHub Style Dynamic Page](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/Markdown_to_HTML_GitHubStyled.html)
+- [x] [OpenSSH Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/openssh.md)
+- [x] [Sudo Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/sudo.md)
+- [x] [TShark Guide](https://github.com/CYFARE/Brain-Notes/blob/main/MiscFuzzing/tshark.md)
 
 #### Systems & Development
 
