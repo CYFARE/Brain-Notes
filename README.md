@@ -31,7 +31,7 @@
 	- [x] [Kali Linux Setup](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/HaxKali.md)
 	- [x] [KVM Setup](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/KVM%20Setup.md)
 
-#### Resources & Random Scripts
+#### Misc Fuzzing
 
 - [x] [AFL++ Reference Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/1.%20AFL%2B%2B%20Reference%20Guide.md)
 - [x] [AFL++ Instrumentation Modes Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/2.%20AFL%2B%2B%20Instrumentation%20Modes%20Guide.md)
