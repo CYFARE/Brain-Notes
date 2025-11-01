@@ -16,14 +16,6 @@ Instead of using v2x command or trying to build the official GUI on Arch or simi
 
 - https://github.com/CYFARE/CYFARE-V2X
 
-## Cross Platform Linux Appimage
-
-## Upscale: RealESRGAN
-
-```bash
-VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia PATH="/home/USERNAME/ffmpeg:$PATH" ./Video2X-x86_64.AppImage -i raw.mp4 -o out_realesrgan.mp4 -p realesrgan --realesrgan-model realesrgan-plus -s 4 -a none -d 0 -c hevc_nvenc --pix-fmt p010le --gop-size 240 --max-b-frames 3 -e rc=constqp -e qp=14 -e preset=p1 -e profile=main10
-```
-
 ## Upscale: RealCUGAN
 
 ### h264_nvenc
@@ -45,10 +37,18 @@ VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json \
 
 ### hvenc
 
-May give errors with many old videos!
+-> May give errors with many old videos!
 
 ```bash
 VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia PATH="/home/USERNAME/ffmpeg:$PATH" ./Video2X-x86_64.AppImage -i raw.mp4 -o out.mp4 -p realcugan --realcugan-model models-se --realcugan-threads 8 -s 4 -a none -d 0 -c hevc_nvenc --pix-fmt p010le --gop-size 240 --max-b-frames 3 -e rc=constqp -e qp=14 -e preset=p1 -e profile=main10
+```
+
+## Upscale: RealESRGAN
+
+-> Slow, GPU not fully supported
+
+```bash
+VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia PATH="/home/USERNAME/ffmpeg:$PATH" ./Video2X-x86_64.AppImage -i raw.mp4 -o out_realesrgan.mp4 -p realesrgan --realesrgan-model realesrgan-plus -s 4 -a none -d 0 -c hevc_nvenc --pix-fmt p010le --gop-size 240 --max-b-frames 3 -e rc=constqp -e qp=14 -e preset=p1 -e profile=main10
 ```
 
 ## Rife

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SysDev/Cheatsheets/CYFARE V2X.md",
+                "file": "SysDev/Cheatsheets/Linux Commands.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "CYFARE V2X"
+              "title": "Linux Commands"
             }
           }
         ]
@@ -162,8 +162,8 @@
   },
   "active": "91fc096eb4b39ea2",
   "lastOpenFiles": [
-    "SysDev/Builds/Chrome Build Guide.md",
     "SysDev/Cheatsheets/CYFARE V2X.md",
+    "SysDev/Builds/Chrome Build Guide.md",
     "SysDev/Builds/FFmpeg Build Guide.md",
     "SysDev/Cheatsheets/Linux Commands.md",
     "SysDev/Builds",

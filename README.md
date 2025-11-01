@@ -33,18 +33,35 @@
 
 #### Resources & Random Scripts
 
+- [x] [AFL++ Reference Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/1.%20AFL%2B%2B%20Reference%20Guide.md)
+- [x] [AFL++ Instrumentation Modes Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/2.%20AFL%2B%2B%20Instrumentation%20Modes%20Guide.md)
+- [x] [FFMPEG Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/ffmpeg.md)
+- [x] [Libxml2 Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/libxml2.md)
 - [x] [Markdown To HTML GitHub Style Dynamic Page](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/Markdown_to_HTML_GitHubStyled.html)
+- [x] [OpenSSH Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/openssh.md)
+- [x] [Sudo Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/sudo.md)
+- [x] [TShark Guide](https://github.com/CYFARE/Brain-Notes/blob/main/Misc/tshark.md)
 
 #### Systems & Development
 
+- [x] Builds
+	- [x] [Chrome Build Guide](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Builds/Chrome%20Build%20Guide.md)
+	- [x] [FFmpeg Build Guide](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Builds/FFmpeg%20Build%20Guide.md)
+	- [x] [Firefox Build Process](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Builds/Firefox%20Build%20Process.md)
 - [x] Cheatsheets
+	- [x] [CYFARE V2X](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/CYFARE%20V2X.md)
 	- [x] [Docker Cheatsheet](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Docker%20Cheatsheet.md)
 	- [x] [IRC - Internet Relay Chat - Guide](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/IRC%20Guide.md)
 	- [x] [Linux Commands](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Linux%20Commands.md)
 	- [x] [Linux Error Management](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Linux%20Error%20Management.md)
 	- [x] [Linux Shell Basics](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Linux%20Shell%20Basics.md)
 	- [x] [Python Style Guide](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Python%20Style%20Guide.md)
+	- [x] [Recon Scripts Setup](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/recon%20scripts%20setup.md)
 	- [x] [Regex Cheatsheet](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/Cheatsheets/Regex%20Cheatsheet.md)
 - [x] .NET Framework WinForms
 	- [x] [Core Functions](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/DotNET%20WinForms/Core%20Functions.md)
 	- [x] [User Interface](https://github.com/CYFARE/Brain-Notes/blob/main/SysDev/DotNET%20WinForms/User%20Interface.md)
+
+#### Windows
+
+- [x] [Advanced Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/WinPro/Advance%20Optimization.md)
