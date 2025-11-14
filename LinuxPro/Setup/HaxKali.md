@@ -3,15 +3,15 @@
 ## Features
 
 - QCOW2 base ( [[KVM Setup]] )
-- Xanmod Kernel Edge ( [[Debian Optimizations]] )
-- SSD & VM optimizations ( [[Debian Optimizations]] )
-- Sandboxed Common Apps ( [[Debian Optimizations]] )
+- Xanmod Kernel Edge ( [[Linux Optimizations]] )
+- SSD & VM optimizations ( [[Linux Optimizations]] )
+- Sandboxed Common Apps ( [[Linux Optimizations]] )
 - 500+ New Packages
 - Preconfigured Custom Tools
 - App Execution Security Improvements ( [[App Optimizations]] )
 - App Customized For Privacy ( [[App Optimizations]] )
 
-[[Debian Optimizations]]
+[[Linux Optimizations]]
 
 [[App Optimizations]]
 
