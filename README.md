@@ -23,7 +23,7 @@
 
 - [x] Optimizations
 	- [x] [App Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/App%20Optimizations.md)
-	- [x] [Debian Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/Debian%20Optimizations.md)
+	- [x] [Linux Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/Linux%20Optimizations.md)
 	- [x] [KVM Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/KVM%20Optimization.md)
 	- [x] [Virtualbox Optimizations](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/VirtualBox%20Optimizations.md)
 - [x] Setup

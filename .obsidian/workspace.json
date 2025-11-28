@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "11f87296c2a5672e",
+        "id": "3454acd0c1f4e0ca",
         "type": "tabs",
         "children": [
           {
-            "id": "9e306fc463213cb1",
+            "id": "164c8a2939aec51d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "README"
             }
           }
         ]
@@ -156,7 +160,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1663cb12437cb771",
+  "active": "164c8a2939aec51d",
   "lastOpenFiles": [
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "LinuxPro/Optimizations/Linux Optimizations.md",
