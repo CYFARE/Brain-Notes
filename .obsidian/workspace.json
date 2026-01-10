@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "SysDev/Builds/Firefox Build Process.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Firefox Build Process"
             }
           }
         ]
@@ -162,6 +162,7 @@
   },
   "active": "164c8a2939aec51d",
   "lastOpenFiles": [
+    "README.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "LinuxPro/Optimizations/Linux Optimizations.md",
     "SysDev/Cheatsheets/CYFARE V2X.md",
@@ -189,7 +190,6 @@
     "Misc/sudo.md",
     "LinuxPro/Optimizations/App Optimizations.md",
     "LinuxPro/Optimizations/KVM Optimization.md",
-    "AI/Finetune LLMs.md",
     "AI"
   ]
 }
