@@ -2,6 +2,20 @@
 
 ## General Commands
 
+### Flatpak Fix (XFCE - Debian)
+
+#### Pinta
+
+For tray launcher:
+```bash
+/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=pinta --file-forwarding --nodevice=dri com.github.PintaProject.Pinta @@ %F @@
+```
+
+For terminal:
+```bash
+flatpak override --user --nodevice=dri com.github.PintaProject.Pinta && flatpak run com.github.PintaProject.Pinta 2>/dev/null
+```
+
 ### Prevent external drive from poweroff/spindown
 
 ```bash
