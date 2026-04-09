@@ -62,17 +62,22 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update -qq
 
+# Check package availability before installing
+pkg_available() {
+    apt-cache show "$1" &>/dev/null 2>&1
+}
+
 PKGS=(
     # Build essentials
     build-essential dkms linux-headers-$(uname -r)
     # Performance tools
-    cpufrequtils irqbalance tuned preload haveged
+    cpufrequtils irqbalance tuned haveged
     # Monitoring
     htop iotop sysstat lm-sensors powertop
     # Networking
     ethtool iperf3 net-tools
     # Filesystem
-    fstrim util-linux
+    util-linux
     # Compression (fastest)
     lz4 zstd pigz pbzip2
     # Low-latency audio
@@ -83,7 +88,11 @@ PKGS=(
 
 for pkg in "${PKGS[@]}"; do
     if ! dpkg -s "$pkg" &>/dev/null; then
-        apt-get install -y -qq "$pkg" 2>/dev/null || warn "Could not install: $pkg"
+        if pkg_available "$pkg"; then
+            apt-get install -y -qq "$pkg" 2>/dev/null || warn "Could not install: $pkg"
+        else
+            warn "Package not available in repos, skipping: $pkg"
+        fi
     fi
 done
 
@@ -394,23 +403,28 @@ NVEOF
         nvidia-smi -pm ENABLED 2>/dev/null || true
     fi
 
-    # Coolbits for overclocking support via Xorg
-    mkdir -p /etc/X11/xorg.conf.d/
-    cat > /etc/X11/xorg.conf.d/20-nvidia-perf.conf << 'EOF'
-Section "Device"
-    Identifier "NVIDIA"
+    # NVIDIA Xorg perf tweaks — ONLY if the proprietary driver is actually loaded
+    # This avoids black-screen if nouveau or no nvidia driver is active
+    if lsmod | grep -q "^nvidia "; then
+        mkdir -p /etc/X11/xorg.conf.d/
+        cat > /etc/X11/xorg.conf.d/20-nvidia-perf.conf << 'EOF'
+# Only GPU perf options — do NOT define Screen/Monitor to avoid breaking DM
+Section "OutputClass"
+    Identifier "nvidia-perf"
+    MatchDriver "nvidia-drm"
     Driver "nvidia"
     Option "Coolbits" "31"
     Option "TripleBuffer" "True"
     Option "RegistryDwords" "PerfLevelSrc=0x2222; PowerMizerEnable=0x1; PowerMizerLevel=0x3; PowerMizerDefault=0x3; PowerMizerDefaultAC=0x3"
-EndSection
-
-Section "Screen"
-    Identifier "Screen0"
-    Device "NVIDIA"
     Option "AllowIndirectGLXProtocol" "off"
 EndSection
 EOF
+        info "NVIDIA Xorg perf config written (OutputClass — safe for DM)"
+    else
+        warn "NVIDIA hardware detected but driver module not loaded — skipping Xorg config"
+        # Remove any leftover config from a previous run
+        rm -f /etc/X11/xorg.conf.d/20-nvidia-perf.conf 2>/dev/null || true
+    fi
 fi
 
 ###############################################################################
@@ -525,21 +539,19 @@ DefaultLimitMEMLOCK=infinity
 CPUAffinity=0
 EOF
 
-# Disable unnecessary services
+# Disable unnecessary services — SAFE list only
+# NOTE: Do NOT disable accounts-daemon (breaks GDM/LightDM login)
+#       Do NOT disable wpa_supplicant (breaks NetworkManager WiFi)
+#       Do NOT disable avahi-daemon blindly (some DEs depend on it)
 DISABLE_SERVICES=(
     apt-daily.timer apt-daily-upgrade.timer
     man-db.timer e2scrub_all.timer
     motd-news.timer
-    accounts-daemon.service
-    avahi-daemon.service
     ModemManager.service
-    wpa_supplicant.service
-    bluetooth.service
     cups.service cups-browsed.service
     unattended-upgrades.service
     packagekit.service
     power-profiles-daemon.service
-    thermald.service
     switcheroo-control.service
     kerneloops.service
     whoopsie.service
@@ -547,9 +559,11 @@ DISABLE_SERVICES=(
 )
 
 for svc in "${DISABLE_SERVICES[@]}"; do
-    systemctl disable "$svc" 2>/dev/null || true
-    systemctl stop "$svc" 2>/dev/null || true
-    systemctl mask "$svc" 2>/dev/null || true
+    if systemctl list-unit-files "$svc" &>/dev/null 2>&1; then
+        systemctl disable "$svc" 2>/dev/null || true
+        systemctl stop "$svc" 2>/dev/null || true
+        systemctl mask "$svc" 2>/dev/null || true
+    fi
 done
 
 ###############################################################################
@@ -587,6 +601,7 @@ log "Optimizing DNS resolution..."
 
 # Use Cloudflare + Google as fast resolvers
 if command -v resolvectl &>/dev/null; then
+    mkdir -p /etc/systemd/resolved.conf.d/
     cat > /etc/systemd/resolved.conf.d/perf.conf 2>/dev/null << 'EOF' || true
 [Resolve]
 DNS=1.1.1.1 8.8.8.8 1.0.0.1 8.8.4.4
@@ -601,22 +616,26 @@ fi
 ###############################################################################
 # 12. EARLYOOM - OOM KILLER
 ###############################################################################
-log "Configuring earlyoom..."
+if command -v earlyoom &>/dev/null || dpkg -s earlyoom &>/dev/null 2>&1; then
+    log "Configuring earlyoom..."
 
-mkdir -p /etc/default/
-cat > /etc/default/earlyoom << 'EOF'
+    mkdir -p /etc/default/
+    cat > /etc/default/earlyoom << 'EOF'
 EARLYOOM_ARGS="-m 3 -s 5 --avoid '(Xorg|Xwayland|gnome-shell|kwin|sway|firefox|chromium)' -r 3600 -n --prefer '(cc1|cc1plus|ld|rustc)'"
 EOF
-systemctl enable earlyoom 2>/dev/null || true
-systemctl restart earlyoom 2>/dev/null || true
+    systemctl enable earlyoom 2>/dev/null || true
+    systemctl restart earlyoom 2>/dev/null || true
+else
+    warn "earlyoom not installed, skipping"
+fi
 
 ###############################################################################
 # 13. GAMEMODE CONFIG
 ###############################################################################
-log "Configuring GameMode..."
+if command -v gamemoded &>/dev/null || dpkg -s gamemode &>/dev/null 2>&1; then
+    log "Configuring GameMode..."
 
-mkdir -p /etc/
-cat > /etc/gamemode.ini << 'EOF'
+    cat > /etc/gamemode.ini << 'EOF'
 [general]
 renice=10
 ioprio=0
@@ -640,6 +659,9 @@ pin_cores=yes
 start=notify-send "GameMode" "Performance mode ON"
 end=notify-send "GameMode" "Performance mode OFF"
 EOF
+else
+    warn "gamemode not installed, skipping"
+fi
 
 ###############################################################################
 # 14. KERNEL MODULE BLACKLIST
@@ -675,8 +697,6 @@ blacklist firewire-ohci
 blacklist firewire-sbp2
 
 # Misc
-blacklist mei_me
-blacklist mei
 blacklist intel_powerclamp
 EOF
 
@@ -796,7 +816,7 @@ echo "  1. ALL CPU security mitigations are DISABLED"
 echo "  2. /var/log is tmpfs — logs are lost on reboot"
 echo "  3. Swap is zram-compressed RAM (no disk swap)"
 echo "  4. Kernel watchdogs disabled"
-echo "  5. Many system services masked"
+echo "  5. Some system services masked"
 echo ""
 echo -e "${YELLOW}  REBOOT REQUIRED for full effect.${NC}"
 echo ""
