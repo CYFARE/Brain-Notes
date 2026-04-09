@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "98c3f85b3929a914",
+        "id": "cc74bc0b14a935b2",
         "type": "tabs",
         "children": [
           {
-            "id": "1054cfe306d11f0d",
+            "id": "913d4167753261e5",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -156,8 +156,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1054cfe306d11f0d",
+  "active": "1663cb12437cb771",
   "lastOpenFiles": [
+    "LinuxPro/Optimizations/Linux Optimizations.md",
+    "LinuxPro/Optimizations/optimize_debian.sh",
     "LinuxPro/Setup/WarDrive.md",
     "LinuxPro/Setup/KVM Setup.md",
     "WinPro/Advance Optimization.md",
@@ -173,7 +175,6 @@
     "SysDev/Cheatsheets/Docker Cheatsheet.md",
     "README.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
-    "LinuxPro/Optimizations/Linux Optimizations.md",
     "SysDev/Cheatsheets/CYFARE V2X.md",
     "SysDev/Builds/Chrome Build Guide.md",
     "SysDev/Builds/FFmpeg Build Guide.md",
@@ -186,7 +187,6 @@
     "SysDev/DotNET WinForms/User Interface.md",
     "SysDev/DotNET WinForms/Core Functions.md",
     "Misc/ffmpeg.md",
-    "Misc/libxml2.md",
     "AI"
   ]
 }
