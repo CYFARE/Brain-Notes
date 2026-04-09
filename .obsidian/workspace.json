@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "993609b8d6b4c04c",
+        "id": "98c3f85b3929a914",
         "type": "tabs",
         "children": [
           {
-            "id": "60cfccacf78ad451",
+            "id": "1054cfe306d11f0d",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -156,8 +156,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1663cb12437cb771",
+  "active": "1054cfe306d11f0d",
   "lastOpenFiles": [
+    "LinuxPro/Setup/WarDrive.md",
+    "LinuxPro/Setup/KVM Setup.md",
     "WinPro/Advance Optimization.md",
     "MiscFuzzing/tshark.md",
     "MiscFuzzing/Untitled.md",
@@ -184,9 +186,7 @@
     "SysDev/DotNET WinForms/User Interface.md",
     "SysDev/DotNET WinForms/Core Functions.md",
     "Misc/ffmpeg.md",
-    "LinuxPro/Setup/KVM Setup.md",
     "Misc/libxml2.md",
-    "Misc/1. AFL++ Reference Guide.md",
     "AI"
   ]
 }
