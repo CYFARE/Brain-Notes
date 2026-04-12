@@ -1,5 +1,11 @@
 # Debian Optimizations
 
+## Automatic Script
+
+The following scripts works for Debian Testing (Trixie) with all the below aggressive optimizations:
+
+- https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Optimizations/optimize_debian.sh
+
 ## Reduce SSD writes
 
 ```bash

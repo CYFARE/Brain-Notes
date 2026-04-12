@@ -49,6 +49,9 @@ This section is not properly working and may result in host system being corrupt
 
 ## GPU Passthrough for PopOS
 
+- The following is OUTDATED!
+- Please use VirtManager GUI for pinning GPU easily.
+
 ### Check System Requirements
 
 - Check if CPU virtualization is enabled using:

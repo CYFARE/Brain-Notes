@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "cc74bc0b14a935b2",
+        "id": "a53ad46a7468caf9",
         "type": "tabs",
         "children": [
           {
-            "id": "913d4167753261e5",
+            "id": "e0e0e309ce08843f",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -156,13 +156,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1663cb12437cb771",
+  "active": "e0e0e309ce08843f",
   "lastOpenFiles": [
+    "README.md",
+    "WinPro/Advance Optimization.md",
+    "LinuxPro/Setup/WarDrive.md",
+    "LinuxPro/Setup/HaxKali.md",
+    "LinuxPro/Setup/KVM Setup.md",
+    "LinuxPro/Setup/Debian Install Guide.md",
+    "LinuxPro/Optimizations/App Optimizations.md",
+    "LinuxPro/Optimizations/KVM Optimization.md",
     "LinuxPro/Optimizations/Linux Optimizations.md",
     "LinuxPro/Optimizations/optimize_debian.sh",
-    "LinuxPro/Setup/WarDrive.md",
-    "LinuxPro/Setup/KVM Setup.md",
-    "WinPro/Advance Optimization.md",
     "MiscFuzzing/tshark.md",
     "MiscFuzzing/Untitled.md",
     "MiscFuzzing/1. AFL++ Reference Guide.md",
@@ -173,7 +178,6 @@
     "CyberSec/BOTSv1_Writeup.md",
     "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Cheatsheets/Docker Cheatsheet.md",
-    "README.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "SysDev/Cheatsheets/CYFARE V2X.md",
     "SysDev/Builds/Chrome Build Guide.md",
@@ -184,9 +188,6 @@
     "SysDev/Cheatsheets/IRC Guide.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
     "SysDev/Cheatsheets/Regex Cheatsheet.md",
-    "SysDev/DotNET WinForms/User Interface.md",
-    "SysDev/DotNET WinForms/Core Functions.md",
-    "Misc/ffmpeg.md",
     "AI"
   ]
 }
