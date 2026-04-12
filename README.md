@@ -30,6 +30,7 @@
 	- [x] [Debian Testing/Trixie/Rolling Setup](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/Debian%20Install%20Guide.md)
 	- [x] [Kali Linux Setup](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/HaxKali.md)
 	- [x] [KVM Setup](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/KVM%20Setup.md)
+	- [x] [War Driving](https://github.com/CYFARE/Brain-Notes/blob/main/LinuxPro/Setup/WarDrive.md)
 
 #### Misc Fuzzing
 
