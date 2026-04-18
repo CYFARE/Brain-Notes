@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a53ad46a7468caf9",
+        "id": "f255e722f28663be",
         "type": "tabs",
         "children": [
           {
-            "id": "e0e0e309ce08843f",
+            "id": "a8320ffcccaa102d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "README"
+              "title": "New tab"
             }
           }
         ]
@@ -160,8 +156,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e0e0e309ce08843f",
+  "active": "a8320ffcccaa102d",
   "lastOpenFiles": [
+    "SysDev/Builds/LLAMA CPP.md",
+    "MiscFuzzing/1. AFL++ Reference Guide.md",
+    "SysDev/Builds/Firefox Build Process.md",
     "README.md",
     "WinPro/Advance Optimization.md",
     "LinuxPro/Setup/WarDrive.md",
@@ -174,9 +173,7 @@
     "LinuxPro/Optimizations/optimize_debian.sh",
     "MiscFuzzing/tshark.md",
     "MiscFuzzing/Untitled.md",
-    "MiscFuzzing/1. AFL++ Reference Guide.md",
     "SysDev/Cheatsheets/Linux Commands.md",
-    "SysDev/Builds/Firefox Build Process.md",
     "LinuxPro/rf_s3cr3t",
     "CyberSec/BB Recon.md",
     "CyberSec/BOTSv1_Writeup.md",
@@ -191,7 +188,6 @@
     "SysDev/Cheatsheets/recon scripts setup.md",
     "SysDev/Cheatsheets/IRC Guide.md",
     "SysDev/Cheatsheets/Python Style Guide.md",
-    "SysDev/Cheatsheets/Regex Cheatsheet.md",
     "AI"
   ]
 }

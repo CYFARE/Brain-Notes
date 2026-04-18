@@ -1,5 +1,29 @@
 
-Partial, just to note multi locale packages part.
+For GNU/Linux only!
+
+### Setup
+
+- Choose Non-Artifact Desktop version for build
+- After initial setup is complete, enter folder and run:
+
+```bash
+git pull
+./mach clobber
+touch mozcofig
+```
+
+- Get optimized mozconfig from: https://github.com/CYFARE/HellFire/tree/main/MozConfigs/Linux64 and use text editor to copy-paste content to mozconfig created in folder.
+
+### Post Build Optimizations
+
+#### BOLT Optimization
+
+```bash
+sudo apt install llvm-bolt -y
+perf record -e cycles:u -j any,u -o perf.data -- ./objdir-opt/dist/bin/firefox
+perf2bolt -p perf.data -o perf.fdata ./objdir-opt/dist/bin/firefox
+llvm-bolt ./objdir-opt/dist/bin/libxul.so -o ./objdir-opt/dist/bin/libxul.so.bolt -data=perf.fdata -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-all-cold -dyno-stats -icf=1 -use-gnu-stack && mv ./objdir-opt/dist/bin/libxul.so.bolt ./objdir-opt/dist/bin/libxul.so
+```
 
 ## Multi-Language Support
 
