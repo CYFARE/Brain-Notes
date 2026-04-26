@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f255e722f28663be",
+        "id": "74e67897978bc9e4",
         "type": "tabs",
         "children": [
           {
-            "id": "a8320ffcccaa102d",
+            "id": "7691df1a0d1a52b5",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -156,8 +156,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a8320ffcccaa102d",
+  "active": "7691df1a0d1a52b5",
   "lastOpenFiles": [
+    "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Builds/LLAMA CPP.md",
     "MiscFuzzing/1. AFL++ Reference Guide.md",
     "SysDev/Builds/Firefox Build Process.md",
@@ -177,7 +178,6 @@
     "LinuxPro/rf_s3cr3t",
     "CyberSec/BB Recon.md",
     "CyberSec/BOTSv1_Writeup.md",
-    "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Cheatsheets/Docker Cheatsheet.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
     "SysDev/Cheatsheets/CYFARE V2X.md",

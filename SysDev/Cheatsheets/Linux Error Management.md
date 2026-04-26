@@ -2,6 +2,28 @@
 
 ## General Commands
 
+### Flatpak Fix (Arch)
+
+#### GitHub Desktop
+
+Fix browser not opening on login:
+```bash
+sudo pacman -S xdg-utils xdg-desktop-portal xdg-desktop-portal-gtk
+
+xdg-settings get default-web-browser
+# if empty:
+xdg-settings set default-web-browser firefox.desktop
+
+systemctl --user restart xdg-desktop-portal
+flatpak run io.github.shiftey.Desktop
+```
+
+If `xdg-settings` still isn't visible inside the flatpak, give it host access:
+
+```bash
+flatpak override --user --filesystem=xdg-config/mimeapps.list:ro io.github.shiftey.Desktop
+```
+
 ### Flatpak Fix (XFCE - Debian)
 
 #### Pinta
