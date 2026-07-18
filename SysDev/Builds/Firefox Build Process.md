@@ -18,11 +18,36 @@ touch mozcofig
 
 #### BOLT Optimization
 
+Arch / CachyOS Specific:
+
 ```bash
-sudo apt install llvm-bolt -y
+# Install tools — llvm-bolt + perf2bolt ship inside Arch/CachyOS's llvm package
+sudo pacman -S --needed llvm perf
+command -v llvm-bolt perf2bolt
+paru -S execstack
+
+# Allow user-space perf profiling
+sudo sysctl kernel.perf_event_paranoid=-1 kernel.kptr_restrict=0
+```
+
+```bash
+./mach build
+
 perf record -e cycles:u -j any,u -o perf.data -- ./objdir-opt/dist/bin/firefox
-perf2bolt -p perf.data -o perf.fdata ./objdir-opt/dist/bin/firefox
-llvm-bolt ./objdir-opt/dist/bin/libxul.so -o ./objdir-opt/dist/bin/libxul.so.bolt -data=perf.fdata -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions -split-all-cold -dyno-stats -icf=1 -use-gnu-stack && mv ./objdir-opt/dist/bin/libxul.so.bolt ./objdir-opt/dist/bin/libxul.so
+
+perf2bolt -p perf.data -o perf.fdata ./objdir-opt/dist/bin/libxul.so
+
+cp ./objdir-opt/dist/bin/libxul.so{,.orig}
+
+llvm-bolt ./objdir-opt/dist/bin/libxul.so \
+  -o ./objdir-opt/dist/bin/libxul.so.bolt \
+  -data=perf.fdata \
+  -reorder-blocks=ext-tsp \
+  -dyno-stats -icf=all
+execstack -c ./objdir-opt/dist/bin/libxul.so.bolt
+and mv ./objdir-opt/dist/bin/libxul.so{.bolt,}
+
+./mach run
 ```
 
 ## Multi-Language Support
