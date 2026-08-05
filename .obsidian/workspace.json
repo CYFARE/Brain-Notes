@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "aec186c29201751b",
+        "id": "4a67bb95570756b3",
         "type": "tabs",
         "children": [
           {
-            "id": "4ab78f78ab576a90",
+            "id": "7725400738006811",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -37,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -156,18 +158,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4ab78f78ab576a90",
+  "active": "7725400738006811",
   "lastOpenFiles": [
+    "README.md",
+    "Untitled.base",
+    "Untitled 1.base",
+    "SysDev/Web2APK.md",
     "SysDev/Builds/Firefox Build Process.md",
     "SysDev/Builds/FFmpeg Build Guide.md",
-    "SysDev/Web2APK.md",
     "SysDev/Cheatsheets/Linux Commands.md",
+    "SysDev/Cheatsheets/CYFARE V2X.md",
+    "SysDev/Cheatsheets/Docker Cheatsheet.md",
+    "SysDev/Cheatsheets/Linux Error Management.md",
     "LinuxPro/Setup/DNS over QUIC.md",
     "SysDev/Web2APK",
     "MiscFuzzing/1. AFL++ Reference Guide.md",
-    "SysDev/Cheatsheets/Linux Error Management.md",
     "SysDev/Builds/LLAMA CPP.md",
-    "README.md",
     "WinPro/Advance Optimization.md",
     "LinuxPro/Setup/WarDrive.md",
     "LinuxPro/Setup/HaxKali.md",
@@ -182,13 +188,10 @@
     "LinuxPro/rf_s3cr3t",
     "CyberSec/BB Recon.md",
     "CyberSec/BOTSv1_Writeup.md",
-    "SysDev/Cheatsheets/Docker Cheatsheet.md",
     "LinuxPro/Optimizations/VirtualBox Optimizations.md",
-    "SysDev/Cheatsheets/CYFARE V2X.md",
     "SysDev/Builds/Chrome Build Guide.md",
     "SysDev/Builds",
     "WinPro",
-    "SysDev/Cheatsheets/recon scripts setup.md",
     "AI"
   ]
 }

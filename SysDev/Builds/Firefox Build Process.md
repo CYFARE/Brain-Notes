@@ -35,15 +35,12 @@ sudo sysctl kernel.perf_event_paranoid=-1 kernel.kptr_restrict=0
 
 perf record -e cycles:u -j any,u -o perf.data -- ./objdir-opt/dist/bin/firefox
 
-perf2bolt -p perf.data -o perf.fdata ./objdir-opt/dist/bin/libxul.so
+perf2bolt --strict=false -p perf.data -o perf.fdata ./objdir-opt/dist/bin/libxul.so
 
 cp ./objdir-opt/dist/bin/libxul.so{,.orig}
 
-llvm-bolt ./objdir-opt/dist/bin/libxul.so \
-  -o ./objdir-opt/dist/bin/libxul.so.bolt \
-  -data=perf.fdata \
-  -reorder-blocks=ext-tsp \
-  -dyno-stats -icf=all
+bash bolt.sh
+  
 execstack -c ./objdir-opt/dist/bin/libxul.so.bolt
 and mv ./objdir-opt/dist/bin/libxul.so{.bolt,}
 
