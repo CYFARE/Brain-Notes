@@ -168,7 +168,7 @@ sudo sysctl -p
 ```bash
 # /etc/default/grub
 
-GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nvme_load=YES zswap.enabled=0 splash loglevel=3 elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off threadirqs rcu_nocbs=1-7 nohz_full=1-7 intel_pstate=active intel_pstate=no_hwp i915.force_probe=8086:a788 xe.force_probe=8086:a788 hugepages=128 transparent_hugepage=never nmi_watchdog=0 skew_tick=1 tsc=reliable clocksource=tsc isolcpus=1-7 idle=poll nohz=on irqaffinity=0 i915.enable_guc=3 i915.enable_psr=0 usbcore.autosuspend=-1 nvme_core.multipath=N"
+GRUB_CMDLINE_LINUX_DEFAULT="nowatchdog nvme_load=YES zswap.enabled=0 splash loglevel=3 elevator=none ibpb=off ibrs=off kpti=off l1tf=off mds=off mitigations=off no_stf_barrier noibpb noibrs nopcid nopti nospec_store_bypass_disable nospectre_v1 nospectre_v2 pcid=off pti=off spec_store_bypass_disable=off spectre_v2=off stf_barrier=off intel_pstate=no_hwp i915.force_probe=8086:a788 xe.force_probe=8086:a788 hugepages=128 transparent_hugepage=never nmi_watchdog=0 i915.enable_guc=3 i915.enable_psr=0 usbcore.autosuspend=-1 nvme_core.multipath=N"
 
 # add the following for Intel P-States driver
 
@@ -369,6 +369,9 @@ wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -o /usr/share/
 
 # 2. Add Repository
 echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org releases main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
+
+# IF KALI
+echo 'deb [signed-by=/usr/share/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org trixie main' | sudo tee /etc/apt/sources.list.d/xanmod-release.list
 
 # 3. Install Kernel
 sudo apt update && sudo apt install linux-xanmod-x64v3
